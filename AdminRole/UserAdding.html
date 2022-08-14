@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <script src="./js/main.js"></script>
+    <title>Admin | Medic</title>
+    <link rel="stylesheet" href="./admin.css">
+</head>
+
+<body id="body-pd" class="bg-white">
+    <header class="header" id="header">
+        <div class="header_toggle"><i class='bx bx-menu' id="header-toggle"></i></div>
+        <div class="header_img"><img src="./avatar4.png" alt=""></div>
+    </header>
+    <div class="l-navbar" id="nav-bar">
+        <nav class="nav">
+            <div><a href="#" class="nav_logo"><span class="nav_logo-name"><i class='bx bx-plus-medical nav-icon'></i>
+                        Medic</span></a>
+                <div class="nav_list">
+                    <a href="#" class="nav_link"><i class='bx bxs-dashboard nav_icon'></i><span
+                            class="nav_name">Dashboard</span></a>
+                    <a href="#" class="nav_link"><i class="fa-solid fa-users"></i><span class="nav_name">Users
+                            List</span></a>
+                    <a href="#" class="nav_link"><i class="fa-solid fa-gear"></i><span
+                            class="nav_name">Setting</span></a>
+                </div>
+            </div>
+            <a href="#" class="nav_link"><i class='bx bx-log-out nav_icon'></i> <span
+                    class="nav_name">SignOut</span></a>
+        </nav>
+    </div>
+    <section id="user-profile">
+        <div class="container">
+            <h3 class="fw-bold mt-3">Account Information</h3>
+            <div class="user-profile-wrapper mt-3">
+                <div class="row p-5">
+                    <div class="user-role col-4 d-flex flex-column justify-content-center align-items-center">
+                        <div class="user-img-border d-flex justify-content-center align-items-center">
+                            <div class="user-img bg-info d-flex justify-content-center">
+                                <img class="rounded" alt="Avatar" id="img-change">
+                            </div>
+                            <label for="image-upload"
+                                class="icon-camera d-flex justify-content-center align-items-center">
+                                <i class="fa fa-camera text-white"></i>
+                                <input type="file" id="image-upload" accept="image/x-png,image/gif,image/jpeg" onchange="document.getElementById('img-change').src = window.URL.createObjectURL(this.files[0])">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="user-detail px-5 col-8">
+                        <h5 class="fw-bold">Add information</h5>
+                        <form class="row mt-4">
+                            <div class="col-md-6">
+                                <label for="fullname" class="form-label">Full Name</label>
+                                <input type="text" value="" class="form-control" id="fullname" placeholder="Full name">
+                            </div>
+                            <div for="form-check" class="col-md-6">
+                                <label for="form-check" class="form-label">Gender</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" value="" type="radio" name="flexRadioDefault"
+                                        id="male" checked>
+                                    <label class="form-check-label" for="male">
+                                        Male
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" value="" type="radio" name="flexRadioDefault"
+                                        id="female">
+                                    <label class="form-check-label" for="female">
+                                        Female
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="text" value="" class="form-control" id="email" placeholder="Email">
+                            </div>
+
+                            <div class="col-6">
+                                <label for="phone-number" class="form-label">Phone Number</label>
+                                <input type="text" value="" class="form-control" id="phone-number" placeholder="Phone">
+                            </div>
+                            <div class="col-6">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="password" placeholder="Password">
+                            </div>
+                            <div class="col-6">
+                                <label for="repassword" class="form-label">Re-enter Password</label>
+                                <input type="password" class="form-control" id="repassword"
+                                    placeholder="Re-enter password">
+                            </div>
+                            <div class="col-6">
+                                <label for="dob" class="form-label">Date of Birth</label>
+                                <input type="date" value="" class="form-control" id="dob">
+                            </div>
+                            <div class="col-6">
+                                <label for="address" class="form-label">Address</label>
+                                <input type="text" value="" class="form-control" id="address">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="role" class="form-label">Role</label>
+                                <select class="form-select" id="role">
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="status" class="form-label">Status</label>
+                                <select class="form-select" id="status">
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                            </div>
+                            <div class="col-12 mt-3">
+                                <button type="submit" class="btn btn-primary">Create</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+﻿@model ChildrenCare.Entities.Prescription
+
+@{
+    ViewData["Title"] = "UpdatePrescriptions";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1>UpdatePrescriptions</h1>
+
+<h4>Prescription</h4>
+<hr/>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="UpdatePrescriptions">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group" hidden>
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" class="form-control" contenteditable="false" readonly/>
+            </div>
+            <div class="form-group" hidden>
+                <label asp-for="AuthorAccountId" class="control-label"></label>
+                <input asp-for="AuthorAccountId" class="form-control" contenteditable="false" readonly/>
+            </div>
+            <div class="form-group" hidden>
+                <label asp-for="CustomerAccountId" class="control-label"></label>
+                <input asp-for="CustomerAccountId" class="form-control" contenteditable="false" readonly/>
+            </div>
+            <div class="form-group">
+                <label asp-for="ReservationId" class="control-label"></label>
+                <input asp-for="ReservationId" class="form-control" contenteditable="false" readonly/>
+            </div>
+            <div class="form-group">
+                <label asp-for="PrescriptionContent" class="control-label"></label>
+                <textarea asp-for="PrescriptionContent" class="form-control" rows="5"></textarea>
+                <span asp-validation-for="PrescriptionContent" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="PrescriptionsList">Back to List</a>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

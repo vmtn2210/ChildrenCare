@@ -1,0 +1,112 @@
+﻿@using ChildrenCare.Entities
+@using ChildrenCare.DTOs.BlogDTOs
+@using ChildrenCare.Utilities
+@model ChildrenCare.DTOs.BlogDTOs.CreateBlogRequestDTO
+@*
+*@
+@{
+    Layout = "_LayoutManager";
+    CreateBlogRequestDTO blog = ViewBag.Blog;
+}
+
+
+<div class="height-100 d-flex justify-content-center align-items-center">
+    <div class="post-detail-wrapper mx-5 px-5 py-5">
+        <div class="return">
+            <a asp-controller="Blog" asp-action="BlogManagement"><i class='bx bxs-chevron-left bx-flip-vertical'></i> Back</a>
+        </div>
+
+        <form asp-controller="Blog" asp-action="CreateBlog" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="post-content">
+                <h2>Add new Post</h2>
+                <div class="row mb-2">
+                    <div class="col-4 title">
+                        Title
+                    </div>
+                    <div class="col-8">
+                        @if (blog != null && !string.IsNullOrWhiteSpace(blog.Tittle))
+                        {
+                            <input asp-for="Tittle" type="text" class="w-100" id="title" value="@blog.Tittle">
+                        }
+                        else
+                        {
+                            <input asp-for="Tittle" type="text" class="w-100" id="title" placeholder="Title">
+                        }
+
+                        <span asp-validation-for="Tittle" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-4 title">
+                        Status
+                    </div>
+                    <div class="col-8">
+                        <select class="form-select" asp-for="Status" aria-label="Select feature on homepage">
+                            <option value="@GlobalVariables.ActiveBlogStatusId">Active</option>
+                            <option value="@GlobalVariables.InActiveBlogStatusId">Inactive</option>
+                        </select>
+                    </div>
+                    <span asp-validation-for="Status" class="text-danger"></span>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-4 title">
+                        Thumbnail
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="ThumbnailFile" type="file">
+                        <span asp-validation-for="ThumbnailFile" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-4 title">
+                        Brief Information
+                    </div>
+                    <div class="col-8">
+                        @if (blog != null && !string.IsNullOrWhiteSpace(blog.BriefInfo))
+                        {
+                            <input asp-for="BriefInfo" type="text" class="w-100" id="briefInfo" value="@blog.BriefInfo">
+                        }
+                        else
+                        {
+                            <input asp-for="BriefInfo" type="text" class="w-100" placeholder="Brief Information" id="briefInfo">
+                        }
+                        <span asp-validation-for="BriefInfo" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-4 title">
+                        Description
+                    </div>
+                    <div class="col-8">
+                        <textarea asp-for="BlogBody" type="text" class="w-100" id="content" style="min-height: 120px" placeholder="Content of the blog here">                
+                        </textarea>
+                        <span asp-validation-for="BlogBody" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-4 title">
+                        Category
+                    </div>
+                    <div class="col-8">
+                        <select asp-for="CategoryId" class="w-100" asp-items="@(new SelectList(ViewBag.Categories, "Id", "Name"))" id="category"></select>
+                        <span asp-validation-for="CategoryId" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="group-button float-end">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@*Script để hiện text editor*@
+<script>
+    ClassicEditor
+        .create(document.querySelector('#content'))
+        .catch(error => {
+            console.error(error);
+        });
+</script>

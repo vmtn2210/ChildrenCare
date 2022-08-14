@@ -1,0 +1,49 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    font-size: 25px;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.thankyou {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    width: 700px;
+    padding: 2rem 0;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+h5 {
+    margin: 10px;
+}
+
+.img {
+    width: 100px;
+    height: 100px;
+}
+
+img {
+    width: 100%;
+    height: auto;
+}
+
+.payment {
+    display: flex;
+}
+
+.visa, .paypal {
+    width: 100px;
+    height: 100px;
+}

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="./css/homepage.css">
+    <title>Service List | Medic</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-white">
+        <div class="container">
+            <a class="navbar-brand" href="./homepage.html">Medic</a>
+            <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav">
+                <i class="navbar-icon fa-solid fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./homepage.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./servicelist.html">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./bloglist.html">Blogs</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="navbar-action float-end">
+                <a href="#">Get started?</a>
+            </div>
+        </div>
+    </nav>
+    <div class="service-list mt-5">
+        <div class="service-list-title text-center">
+            <h5 class="text-primary">OUR SERVICES</h5>
+            <h2>Our Departments</h2>
+        </div>
+        <div class="action-sider my-3 d-flex justify-content-end">
+            <!--Sort by date-->
+            <div class="me-2">
+                <button class="btn btn-primary">Sort by updated date</button>
+            </div>
+            <!-- Category -->
+            <div class="categorybox me-2">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownCategory"
+                    data-bs-toggle="dropdown">
+                    Category
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownCategory">
+                    <li><a class="dropdown-item" href="#">Service 1</a></li>
+                    <li><a class="dropdown-item" href="#">Service 2</a></li>
+                    <li><a class="dropdown-item" href="#">Cate 3</a></li>
+                </ul>
+            </div>
+            <!-- Search -->
+            <div class="searchbox w-25 me-4">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search..." autocomplete="off">
+                    <div class="input-group-append">
+                        <div class="btn bg-primary text-white"><i class="fa-solid fa-magnifying-glass"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="service-list-wrapper mx-5">
+            <div class="service-list-item d-flex my-3">
+                <div class="service-list-img">
+                    <img src="./images/surgery.jpg" alt="surgery">
+                </div>
+                <div class="service-list-info ms-5 my-3">
+                    <h5 class="text-uppercase text-muted">surgery</h5>
+                    <h2>Surgery</h2>
+                    <p class="service-description">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repellendus
+                        tempore earum, ad sit illo nostrum voluptates veritatis porro in fugiat eveniet eius illum.
+                        Tenetur, alias porro ab enim accusamus sapiente.</p>
+                    <a href="./">View Detail <i class="fa-solid fa-arrow-right"></i></a>
+                    <a href="./" class="text-danger ms-2">Feedback <i class="fa-solid fa-comment-dots"></i></a>
+                </div>
+                <div class="service-price text-center mt-5 me-5">
+                    <h6 class="service-price-origin text-muted text-decoration-line-through">$120</h6>
+                    <h3 class="service-price-sale text-primary">$100</h3>
+                    <button class="btn btn-sm btn-info"><i class="fa-solid fa-cart-arrow-down text-white"></i></button>
+                </div>
+            </div>
+            <div class="service-list-item d-flex my-3">
+                <div class="service-list-img">
+                    <img src="./images/surgery.jpg" alt="surgery">
+                </div>
+                <div class="service-list-info ms-5 my-3">
+                    <h5 class="text-uppercase text-muted">surgery</h5>
+                    <h2>Surgery</h2>
+                    <p class="service-description">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repellendus
+                        tempore earum, ad sit illo nostrum voluptates veritatis porro in fugiat eveniet eius illum.
+                        Tenetur, alias porro ab enim accusamus sapiente.</p>
+                    <a href="./" class="">View Detail <i class="fa-solid fa-arrow-right"></i></a>
+                    <a href="./" class="text-danger ms-2">Feedback <i class="fa-solid fa-comment-dots"></i></a>
+                </div>
+                <div class="service-price text-center mt-5 me-5">
+                    <h6 class="service-price-origin text-muted text-decoration-line-through">$120</h6>
+                    <h3 class="service-price-sale text-primary">$100</h3>
+                    <button class="btn btn-sm btn-info"><i class="fa-solid fa-cart-arrow-down text-white"></i></button>
+                </div>
+            </div>
+            <div class="service-list-item d-flex my-3">
+                <div class="service-list-img">
+                    <img src="./images/surgery.jpg" alt="surgery">
+                </div>
+                <div class="service-list-info ms-5 my-3">
+                    <h5 class="text-uppercase text-muted">surgery</h5>
+                    <h2>Surgery</h2>
+                    <p class="service-description">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repellendus
+                        tempore earum, ad sit illo nostrum voluptates veritatis porro in fugiat eveniet eius illum.
+                        Tenetur, alias porro ab enim accusamus sapiente.</p>
+                    <a href="./" class="">View Detail <i class="fa-solid fa-arrow-right"></i></a>
+                    <a href="./" class="text-danger ms-2">Feedback <i class="fa-solid fa-comment-dots"></i></a>
+                </div>
+                <div class="service-price text-center mt-5 me-5">
+                    <h6 class="service-price-origin text-muted text-decoration-line-through">$120</h6>
+                    <h3 class="service-price-sale text-primary">$100</h3>
+                    <button class="btn btn-sm btn-info"><i class="fa-solid fa-cart-arrow-down text-white"></i></button>
+                </div>
+            </div>
+            <nav class="d-flex justify-content-center">
+                <ul class="pagination">
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                </ul>
+            </nav>
+        </div>
+        
+    </div>
+
+</body>
+
+</html>

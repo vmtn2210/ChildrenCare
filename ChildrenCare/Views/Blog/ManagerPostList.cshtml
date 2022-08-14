@@ -1,0 +1,105 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_LayoutManager";
+}
+<div class="height-100">
+        <div class="container">
+            <div class="action d-flex justify-content-between">
+                <div class="col-3 mb-3">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
+                    </div>
+                </div>
+                <div class="col">
+                    <a href="./managerPostAdd.html" class="btn btn-outline-primary float-end">+ New post</a>
+                </div>
+            </div>
+            <table class="table table-hover bg-white">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Thumbnail</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">
+                            <div class="dropdown">
+                                <a class="dropdown-toggle text-dark fw-bold" data-bs-toggle="dropdown">
+                                    Category
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-dark">
+                                    <li><a class="dropdown-item" href="#">A to Z</a></li>
+                                    <li><a class="dropdown-item" href="#">Z to A</a></li>
+                                </ul>
+                            </div>
+                        </th>
+                        <th scope="col">
+                            <div class="dropdown">
+                                <a class="dropdown-toggle text-dark fw-bold" data-bs-toggle="dropdown">
+                                    Author
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-dark">
+                                    <li><a class="dropdown-item" href="#">A to Z</a></li>
+                                    <li><a class="dropdown-item" href="#">Z to A</a></li>
+                                </ul>
+                            </div>
+                        </th>
+                        <th scope="col">
+                            <div class="dropdown">
+                                <a class="dropdown-toggle text-dark fw-bold" data-bs-toggle="dropdown">
+                                    Featured
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-dark">
+                                    <li><a class="dropdown-item" href="#">A to Z</a></li>
+                                    <li><a class="dropdown-item" href="#">Z to A</a></li>
+                                </ul>
+                            </div>
+                        </th>
+                        <th scope="col">
+                            <div class="dropdown">
+                                <a class="dropdown-toggle text-dark fw-bold" data-bs-toggle="dropdown">
+                                    Status
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-dark">
+                                    <li><a class="dropdown-item" href="#">A to Z</a></li>
+                                    <li><a class="dropdown-item" href="#">Z to A</a></li>
+                                </ul>
+                            </div>
+                        </th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><img class="thumbnail" src="./images/avatar4.png"></td>
+                        <td>Mark Title Mark Title Mark Title Mark Title Mark Title</td>
+                        <td>Otto</td>
+                        <td>mdo</td>
+                        <td>Featured 1</td>
+                        <td>Approved</td>
+                        <td>
+                            <div class="dropdown">
+                                <a data-bs-toggle="dropdown">
+                                    <i class="fa-solid fa-gear text-primary"></i>
+                                </a>
+                                <ul class="dropdown-menu ">
+                                    <li><a href="#" class="dropdown-item">Hide</a></li>
+                                    <li><a href="#" class="dropdown-item">Show</a></li>
+                                    <li><a href="./managerPostDetail.html" class="dropdown-item">Edit</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <nav>
+                <ul class="pagination justify-content-center">
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>

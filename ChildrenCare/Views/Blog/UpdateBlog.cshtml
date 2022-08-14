@@ -1,0 +1,137 @@
+﻿@model ChildrenCare.DTOs.BlogDTOs.UpdateBlogRequestDTO
+@using ChildrenCare.DTOs.BlogDTOs
+@using ChildrenCare.Entities
+@using ChildrenCare.Utilities
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_LayoutManager";
+    BlogDetailDTO blog = ViewBag.Blog;
+}
+<div class="height-100 d-flex justify-content-center align-items-center">
+    <div class="post-detail-wrapper mx-5 px-5 py-5">
+        <div class="return">
+            <a asp-controller="Blog" asp-action="BlogManagement"><i class='bx bxs-chevron-left bx-flip-vertical'></i> Back</a>
+        </div>
+        <form asp-controller="Blog" asp-action="UpdateBlog" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="Id" type="hidden" value="@blog.Id"/>
+            <div class="post-content">
+                <h2>Edit Blog</h2>
+                <div class="row mb-2">
+                    <div class="col-4 title">
+                        Title
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Tittle" type="text" class="w-100" value="@blog.Tittle" id="title">
+                        @*@if (blog != null && !string.IsNullOrWhiteSpace(blog.Tittle))
+                {
+                    <input asp-for="Tittle" type="text" class="w-100" id="title" value="@blog.Tittle">
+                }
+                else
+                {
+                    <input asp-for="Tittle" type="text" class="w-100" id="title" placeholder="Title">
+                }*@
+
+                        @*<span asp-validation-for="Tittle" class="text-danger"></span>*@
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-4 title">
+                        Status
+                    </div>
+                    <div class="col-8">
+                        <select class="form-select" asp-for="Status" aria-label="Select feature on homepage">
+                            <option value="@GlobalVariables.ActiveBlogStatusId">Active</option>
+                            <option value="@GlobalVariables.InActiveBlogStatusId">Inactive</option>
+                        </select>
+                    </div>
+
+                    <span asp-validation-for="Status" class="text-danger"></span>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-4 title">
+                        Thumbnail
+                    </div>
+                    <div class="col-8">
+                        <input required value="Hello" asp-for="ThumbnailFile" type="file" accept="image/x-png,image/gif,image/jpeg" id="thumbnail">
+                        <img src="@blog.ThumbnailUrl" alt="2" style="height:200px; width: 200px"/>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-4 title">
+                        Brief Information
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="BriefInfo" value="@blog.BriefInfo" type="text" class="w-100">
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-4 title">
+                        Description
+                    </div>
+                    <div class="col-8">
+                        @*<textarea asp-for="BlogBody" type="text" class="w-100" style="min-height: 120px"></textarea>*@
+                        <input asp-for="BlogBody" value="@blog.BlogBody" type="text" class="w-100" style="min-height: 120px">
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-4 title">
+                        Category
+                    </div>
+                    <div class="col-8">
+                        <select asp-for="CategoryId" class="form-control" asp-items="@(new SelectList(ViewBag.Categories, "Id", "Name", @blog.CategoryId))" id="category"></select>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-4 title">
+                        Status
+                    </div>
+                    <div class="col-8">
+                        <select class="form-select" asp-for="Status" aria-label="Select Status">
+                            <option value="6">Active</option>
+                            <option value="7">Inactive</option>
+                        </select>
+                        <span asp-validation-for="Status" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            @*<input asp-for="Id" type="hidden" value="@blog.Id"/>
+    <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input asp-for="Tittle" type="text" class="form-control" value="@blog.Tittle" id="title">
+    </div>
+    <div class="mb-3">
+        <label class="form-label" for="thumbnail">Thumbnail</label>
+        <input asp-for="ThumbnailFile" type="file" class="form-control" id="thumbnail">
+    </div>
+    <div class="mb-3">
+        <label for="briefInfo" class="form-label">Brief Info</label>
+        <input asp-for="BriefInfo" type="text" class="form-control" value="@blog.BriefInfo" id="briefInfo">
+    </div>
+    <div class="mb-3">
+        <label for="content" class="form-label">Content</label>
+        <textarea asp-for="BlogBody" type="text" class="form-control" id="content">
+            </textarea>
+    </div>
+    <div class="mb-3">
+        <label for="category" class="form-label">Category</label>
+        <select asp-for="CategoryId" class="form-control" asp-items="@(new SelectList(ViewBag.Categories, "Id", "Name", @blog.CategoryId))" id="category"></select>
+    </div>*@
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+
+
+@*Script để hiện text editor*@
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#content' ) )
+        .then(editor=>editor.setData('@Html.Raw(@blog.BlogBody)'))
+        .catch( error => {
+            console.error( error );
+        } );
+</script>

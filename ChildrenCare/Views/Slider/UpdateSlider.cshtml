@@ -1,0 +1,94 @@
+﻿@model ChildrenCare.Entities.Slider
+
+@using ChildrenCare.Utilities
+@{
+    ViewData["Title"] = "SliderList";
+
+    if (User.IsInRole(GlobalVariables.ManagerRole))
+    {
+        Layout = "~/Views/Shared/_LayoutManager.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_LayoutError.cshtml";
+    }
+}
+<div class="height-100 d-flex justify-content-center align-items-center">
+    <div class="post-detail-wrapper mx-5 px-5 py-5">
+        <div class="return">
+            <a asp-controller="Slider" asp-action="SliderList"><i class='bx bxs-chevron-left bx-flip-vertical'></i> Back</a>
+        </div>
+        <form asp-action="UpdateSlider">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @* <input type="hidden" asp-for="Id"/> *@
+            <div class="post-content">
+                <h2>Edit Slider</h2>
+                <div class="row mb-2">
+                    <div class="col-4 title">
+                        Title
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Title" type="text" class="w-100">
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-4 title">
+                        Status
+                    </div>
+                    <div class="col-8">
+                        <select class="form-select" asp-for="Status" aria-label="Select Status">
+                            <option value="1">Active</option>
+                            <option value="2">Inactive</option>
+                        </select>
+                        <span asp-validation-for="Status" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-2" hidden>
+                    <div class="col-4 title">
+                        BackLink
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="BackLink" type="text" class="w-100">
+                        <span asp-validation-for="BackLink" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-4 title">
+                        ThumbnailUrl
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="ThumbnailUrl" type="text" class="w-100">
+                        <span asp-validation-for="ThumbnailUrl" class="text-danger"></span>
+                    </div>
+                </div>
+                <input asp-for="LastUpdate" value="@DateTime.Now" type="hidden">
+                <input asp-for="CreatedDate" value="@DateTime.Now" type="hidden">
+                @*<div class="row mb-2">
+                    <div class="col-4 title">
+                        Created Date
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="CreatedDate" type="text" class="w-100" disabled>
+                        <span asp-validation-for="CreatedDate" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-4 title">
+                        Last Update
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="LastUpdate" type="text" class="w-100">
+                        <span asp-validation-for="LastUpdate" class="text-danger"></span>
+                    </div>
+                </div>*@
+            </div>
+            <button type="submit" value="Save" class="btn btn-primary">Submit</button>
+            <h6>@TempData["Success"]</h6>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

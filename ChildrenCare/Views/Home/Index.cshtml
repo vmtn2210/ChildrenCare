@@ -1,0 +1,176 @@
+﻿@using ChildrenCare.DTOs.ServiceDTOs
+@using ChildrenCare.DTOs.BlogDTOs
+@model List<ChildrenCare.Entities.Slider>
+
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "_Layout";
+    GetFeaturedServiceListResponseDTO dto = ViewBag.Services;
+    var serviceList = dto.Services.ToList();
+}
+
+<!--Header-->
+<!--Home-->
+<section id="home">
+    <div class="welcome-wrapper d-flex justify-content-between">
+        <div class="welcome-title">
+            <h1>Professional Care Of Your Health.</h1>
+            <p class="text-muted">There nothing more important than our good health, cause that’s our capital assest for our good future.</p>
+            <div class="welcome-action">
+                <a id="login" asp-controller="AppUser" asp-action="Login" class="btn btn-primary px-3">Get Started</a>
+                <a asp-controller="Service" asp-action="ServiceList" class="btn btn-outline-primary px-3">Book Appointment</a>
+            </div>
+        </div>
+        <div class="welcome-image">
+            <img src="./images/doctor.png" class="w-100" alt="doctor">
+        </div>
+    </div>
+</section>
+
+<!--Slider-->
+@{
+    <section id="slider">
+        <div class="container">
+            <div id="carousel" class="carousel slide px-25" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    @{
+                        int j = 0;
+                    }
+                    @foreach (var item in Model)
+                    {
+                        @if (@item.Status == 1)
+                        {
+                            j++;
+                            var active = j == 1 ? "active" : "";
+                            <a class="carousel-item @active">
+                                <img src=@item.ThumbnailUrl class="d-block" style="height: 500px; width: 100%" alt=@item.Title>
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h5>@item.Title</h5>
+                                </div>
+                            </a>
+                        }
+                    }
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </section>
+}
+
+<!--Services-->
+@{
+    if (serviceList != null && serviceList.Any())
+    {
+        <!--Services-->
+        <section id="service">
+            <div class="service-wrapper">
+                <div class="service-title text-center">
+                    <h5 class="text-primary">OUR SERVICES</h5>
+                    <h1>Our Department</h1>
+                    <a asp-controller="Service" asp-action="ServiceList" class="read-all float-end">View All <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        @for (var i = 0; i < serviceList.Count(); i++)
+                        {
+                            var tabId = "nav-" + i + "-tab";
+                            var dataTarget = "#nav-" + i;
+                            if (i == 0)
+                            {
+                                <button class="nav-link active" id="@tabId" data-bs-toggle="tab" data-bs-target="@dataTarget"
+                                        type="button" role="tab" aria-controls="nav-1" aria-selected="true">
+                                    @serviceList[i].Name
+                                </button>
+                            }
+                            else
+                            {
+                                <button class="nav-link" id="@tabId" data-bs-toggle="tab" data-bs-target="@dataTarget"
+                                        type="button" role="tab" aria-controls="nav-1" aria-selected="true">
+                                    @serviceList[i].Name
+                                </button>
+                            }
+                        }
+                    </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    @for (var i = 0; i < serviceList.Count(); i++)
+                    {
+                        var tabId = "nav-" + i + "-tab";
+                        var dataTarget = "nav-" + i;
+                        var imageSource = string.IsNullOrWhiteSpace(serviceList[i].ThumbnailUrl) ? "https://wolper.com.au/wp-content/uploads/2017/10/image-placeholder.jpg" : serviceList[i].ThumbnailUrl;
+                        var serviceName = serviceList[i].Name;
+                        var serviceBriefInfo = serviceList[i].BriefInfo;
+                        if (i == 0)
+                        {
+                            <div class="tab-pane fade show active" id="@dataTarget" role="tabpanel" aria-labelledby="@tabId">
+                                <div class="service-item">
+                                    <div class="service-image col-7">
+                                        <img src=@imageSource alt="">
+                                    </div>
+                                    <div class="service-info col-5">
+                                        <h4>@serviceName</h4>
+                                        <p>@serviceBriefInfo</p>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="tab-pane fade show" id="@dataTarget" role="tabpanel" aria-labelledby="@tabId">
+                                <div class="service-item">
+                                    <div class="service-image">
+                                        <img src=@imageSource alt="">
+                                    </div>
+                                    <div class="service-info">
+                                        <h4>@serviceName</h4>
+                                        <p>@serviceBriefInfo</p>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </section>
+    }
+}
+
+
+<section id="hot-blog">
+    <div class="hot-blog-wrapper">
+        <div class="col-8 hot-blog-item-wrapper d-flex">
+            @foreach (var blog in ((List<GetBlogListResponseDTO>)ViewBag.Blogs.Items).Take((2)))
+            {
+                {
+                    <div class="col-6 hot-blog-item">
+                        <a asp-controller="Blog" asp-action="BlogDetail" asp-route-id="@blog.Id">
+                            <div class="hot-blog-image">
+                                <img src="@blog.ThumbnailUrl" alt="@blog.Tittle">
+                            </div>
+                            <div class="hot-blog-info">
+                                <h5>@blog.Tittle</h5>
+                                <p style="text-overflow: ellipsis">@blog.BriefInfo</p>
+                            </div>
+                        </a>
+                    </div>
+                }
+            }
+        </div>
+        <div class="col-4 ms-3 hot-blog-title">
+            <h4 class="text-primary">OUR BLOGS</h4>
+            <h1>Read Hotest News</h1>
+            <p>
+                Read the latest news and get the updates of health and treatment. You can know everthing about health
+                and treatment by reading the blog.
+            </p>
+            <a class="read-all" asp-controller="Blog" asp-action="BlogList">Read All Blogs <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+    </div>
+</section>

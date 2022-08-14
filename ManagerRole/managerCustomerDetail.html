@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <script src="./js/main.js"></script>
+    <title>Manager | Medic</title>
+    <link rel="stylesheet" href="./css/root.css">
+</head>
+
+<body id="body-pd">
+    <header class="header" id="header">
+        <div class="header_toggle"><i class='bx bx-menu' id="header-toggle"></i></div>
+        <div class="header_img"><img src="./images/avatar4.png" alt=""></div>
+    </header>
+    <div class="l-navbar" id="nav-bar">
+        <nav class="nav">
+            <div><a href="#" class="nav_logo"><span class="nav_logo-name"><i class='bx bx-plus-medical nav-icon'></i>
+                        Medic</span></a>
+                <div class="nav_list">
+                    <a href="#" class="nav_link"><i class='bx bxs-dashboard nav_icon'></i><span
+                        class="nav_name">Dashboard</span></a>
+                <a href="#" class="nav_link"><i class='bx bxs-cart-alt nav_icon'></i><span
+                        class="nav_name">Reservations</span></a>
+                <a href="./managerPostList.html" class="nav_link"><i class='bx bx-list-plus nav_icon'></i><span
+                        class="nav_name">Posts</span></a>
+                <a href="./managerSliderList.html" class="nav_link"><i class='bx bx-slideshow nav_icon'></i><span
+                        class="nav_name">Sliders</span></a>
+                <a href="./managerServiceList.html" class="nav_link"><i class='bx bx-task nav_icon'></i><span
+                        class="nav_name">Services</span></a>
+                <a href="./managerCustomerList.html" class="nav_link active"><i
+                        class='bx bx-user-circle nav_icon'></i><span class="nav_name">Customers</span></a>
+                <a href="./managerFeedbackList.html" class="nav_link"><i class='bx bx-star'></i><span
+                        class="nav_name">Feedback</span></a>
+                </div>
+            </div>
+            <a href="#" class="nav_link"><i class='bx bx-log-out nav_icon'></i> <span
+                    class="nav_name">SignOut</span></a>
+        </nav>
+    </div>
+
+    <div class="height-100 d-flex justify-content-center align-items-center">
+        <div class="post-detail-wrapper px-5 pb-5">
+            <nav class="navbar navbar-expand-lg">
+                <div class="collapse navbar-collapse" id="navbarText">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="./managerCustomerDetail.html">Customer Information</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="./managerCustomerHistory.html">History</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="return">
+                <a href="./managerCustomerList.html"><i class='bx bxs-chevron-left bx-flip-vertical'></i> Back</a>
+            </div>
+            <div class="post-content">
+                <h2>Information Detail</h2>
+                <div class="row mb-2">
+                    <div class="col-4 title">
+                        Name
+                    </div>
+                    <div class="col-8">
+                        <input type="text" class="w-100" placeholder="Name">
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-4 title">
+                        Gender
+                    </div>
+                    <div class="col-8">
+                        <select name="" id="" class="w-100">
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-4 title">
+                        Email
+                    </div>
+                    <div class="col-8">
+                        <input type="text" class="w-100" placeholder="Email">
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-4 title">
+                        Phone Number
+                    </div>
+                    <div class="col-8">
+                        <input type="text" class="w-100" placeholder="Phone Number">
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-4 title">
+                        Address
+                    </div>
+                    <div class="col-8">
+                        <input type="text" class="w-100" placeholder="Address">
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-4 title">
+                        Status
+                    </div>
+                    <div class="col-8">
+                        <select name="" id="" class="w-100" disabled>
+                            <option value="contact">Contact</option>
+                            <option value="potential">Potential</option>
+                            <option value="customer">Customer</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="group-button float-end">
+                    <button class="btn btn-outline-secondary">Cancel</button>
+                    <button class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

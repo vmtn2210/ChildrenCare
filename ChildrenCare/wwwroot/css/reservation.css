@@ -1,0 +1,88 @@
+﻿* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0 5%;
+}
+
+ul {
+    padding-left: 0.5rem;
+}
+
+    ul li {
+        list-style-type: none;
+    }
+
+.navbar {
+    background-color: #f3f7fd;
+}
+
+    .navbar a {
+        font-size: 20px;
+    }
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+.nav-link {
+    font-weight: 500;
+    margin-right: 19px;
+    background-image: linear-gradient(#0e63dc, #0e63dc);
+    background-size: 0% 2px;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    transition: 0.3s ease;
+}
+
+    .nav-link:hover {
+        background-size: 100% 2px;
+    }
+
+.nav {
+    border-bottom: 3px solid #eee;
+}
+
+.table-wrapper {
+    border: 1px solid black;
+    border-radius: 0.3rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    max-height: 200px;
+    overflow: auto;
+}
+
+.table {
+    height: auto;
+}
+
+    .table > thead {
+        position: sticky;
+        top: 0;
+        background-color: white;
+    }
+
+.doctor,
+.nurse {
+    font-size: 20px;
+}
+
+.receiver-info {
+    border: 1px solid black;
+    padding: 1rem;
+    max-width: 50vw;
+}
+
+    .receiver-info .name {
+        font-weight: 500;
+    }
+
+.thumbnail {
+    height: 50px;
+    width: 50px;
+}
+
+button {
+    outline: none;
+    border: none;
+}

@@ -1,0 +1,99 @@
+﻿@using ChildrenCare.DTOs.BlogDTOs
+@using ChildrenCare.Entities
+@using ChildrenCare.Utilities
+@*
+*@
+@{
+    Layout = "_Layout";
+    AdvancedGetBlogCustomerListResponseDTO dto = ViewBag.Blogs;
+    var bloglist = dto.Blogs.Items;
+}
+<div class="container">
+    <div class="action-sider mb-3 d-flex justify-content-end">
+        <!-- Search -->
+
+        <form asp-action="BlogSearch" method="get">
+            <div class="col">
+                <div class="input-group">
+                    <select class="form-control form-select" name="category">
+                        @{
+                            string category = (ViewData["CurrentCategory"] ?? string.Empty) as string;
+                            if (!string.IsNullOrEmpty(category))
+                            {
+                                <option value="">Category</option>
+                                @foreach (Category c in @ViewBag.Categories)
+                                {
+                                    if (category == @c.Id.ToString())
+                                    {
+                                        <option value="@c.Id" selected>@c.Name</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@c.Id">@c.Name</option>
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                <option value="" selected>Category</option>
+                                @foreach (Category c in @ViewBag.Categories)
+                                {
+                                    <option value="@c.Id">@c.Name</option>
+                                }
+                            }
+                        }
+                    </select>
+                    <input name="title" type="text" value="@ViewData["CurrentTitle"]" class="form-control" placeholder="Title">
+                    <div class="input-group-append">
+                        <button class="btn bg-primary text-white" type="submit">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+    <!-- Blog list -->
+    <div class="row blog-list-wrapper">
+        @foreach (var blog in bloglist)
+        {
+            if (blog.Status == GlobalVariables.ActiveBlogStatusId)
+            {
+                <div class="col-12 blog-list-item d-flex mb-2">
+                    <div class="blog-item-img me-2">
+                        @if (String.IsNullOrWhiteSpace(blog.ThumbnailUrl))
+                        {
+                            <p>Blog Doesn't have a thumbnail</p>
+                        }
+                        else
+                        {
+                            <img src="@blog.ThumbnailUrl" alt=".." style="height: 300px; width: 300px">
+                        }
+
+                    </div>
+                    <div class="blog-item-title">
+                        <h4>@blog.Tittle</h4>
+                        <p>@blog.BriefInfo</p>
+                        <a asp-controller="Blog" asp-action="BlogDetail" asp-route-id="@blog.Id">Read now</a>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+
+
+    <nav class="d-flex justify-content-center">
+        <ul class="pagination pagination-md">
+            <li class="page-item active" aria-current="page">
+                <span class="page-link">1</span>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">2</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">3</a>
+            </li>
+        </ul>
+    </nav>
+</div>

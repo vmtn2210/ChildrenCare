@@ -1,0 +1,310 @@
+﻿@using ChildrenCare.Utilities
+@{
+
+    if (User.IsInRole(GlobalVariables.AdministratorRole))
+    {
+        Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_LayoutError.cshtml";
+    }
+}
+
+<div class="row">
+    @*<div class="col-12 my-3">
+        <div class="card card-revenue bg-white">
+        <div class="card-body">
+        <div class="d-flex justify-content-between">
+        <div class="icon-revenue">
+        <i class="h3 fa-solid fa-sack-dollar fw-bold text-success"></i>
+        </div>
+        <div class="total-revenue text-center">
+        <h4 class="fw-bold text-success">10312100$</h4>
+        <h5 class="fw-bold text-muted">Total Revenues</h5>
+        </div>
+        </div>
+        <div class="revenue-chart-wrapper">
+        <canvas id="myRevenueChart"></canvas>
+        </div>
+        </div>
+        </div>
+        </div>*@
+    <div class="col-lg-4 mb-3 d-flex flex-column">
+        <div class="card card-trend mb-3">
+            <div class="card-img">
+                <img src="~/images/medal.png" alt=".">
+            </div>
+            <h4 class="fw-bold">Top all <span class="h6 text-muted float-end">Last 7 days</span></h4>
+            <h5>Congratulations 🎉 <a href="#" class="fw-bold text-info">Surgery</a>!</h5>
+            <p class="text-muted">With <span class="fw-bold text-danger">200</span> times selected.</p>
+        </div>
+        <div class="card card-trend">
+            <div class="card-img">
+                <img src="~/images/medal.png" alt=".">
+            </div>
+            <h4 class="fw-bold">Top success <span class="h6 text-muted float-end">Last 7 days</span></h4>
+            <h5>Congratulations 🎉 <a href="#" class="fw-bold text-danger">Medical Examination</a>!</h5>
+            <p class="text-muted">With <span class="fw-bold text-danger">123</span> times selected successfully.</p>
+        </div>
+    </div>
+    <div class="col-lg-8 mb-3">
+        <div class="card">
+            <h4 class="fw-bold">New Reservations</h4>
+            <div class="table-responsive">
+                <table class="table table-borderless">
+                    <thead>
+                        <tr>
+                            <th class="p-0"></th>
+                            <th class="p-0"></th>
+                            <th class="p-0"></th>
+                            <th class="p-0"></th>
+                            <th class="p-0"></th>
+                            <th class="p-0"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>40</td>
+                            <td class="fw-bold">
+                                Nguyen Trung Hieu
+                                <div>
+                                    Email: <span class="text-muted">nthieu1332002@gmail.com </span>
+                                </div>
+                            </td>
+                            <td class="text-muted">20/06/2022</td>
+                            <td>Surgery</td>
+                            <td class="fw-bold">$120</td>
+                            <td><span class="badge bg-primary">Submitted</span></td>
+                        </tr>
+                        <tr>
+                            <td>41</td>
+                            <td class="fw-bold">
+                                Nguyen Trung Hieu
+                                <div>
+                                    Email: <span class="text-muted">nthieu1332002@gmail.com </span>
+                                </div>
+                            </td>
+                            <td class="text-muted">15/06/2022</td>
+                            <td>Medicine</td>
+                            <td class="fw-bold">$125</td>
+                            <td><span class="badge bg-warning">Canceled</span></td>
+                        </tr>
+                        <tr>
+                            <td>42</td>
+                            <td class="fw-bold">
+                                Nguyen Thien Nhan
+                                <div>
+                                    Email: <span class="text-muted">thiennhan@gmail.com </span>
+                                </div>
+                            </td>
+                            <td class="text-muted">12/06/2022</td>
+                            <td>Cardiology</td>
+                            <td class="fw-bold">$120</td>
+                            <td><span class="badge bg-success">Success</span></td>
+                        </tr>
+                        <tr>
+                            <td>43</td>
+                            <td class="fw-bold">
+                                Nguyen Thien Nhan
+                                <div>
+                                    Email: <span class="text-muted">thiennhan@gmail.com </span>
+                                </div>
+                            </td>
+                            <td class="text-muted">12/06/2022</td>
+                            <td>Cardiology</td>
+                            <td class="fw-bold">$120</td>
+                            <td><span class="badge bg-success">Success</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-12 mb-3">
+        <div class="card h-100">
+            <h4 class="fw-bold">New Users</h4>
+            <div class="table-responsive">
+                <table class="table table-borderless">
+                    <thead>
+                        <tr>
+                            <th class="p-0"></th>
+                            <th class="p-0"></th>
+                            <th class="p-0"></th>
+                            <th class="p-0"></th>
+                            <th class="p-0"></th>
+                            <th class="p-0"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>51</td>
+                            <td class="fw-bold">
+                                Nguyen Trung Hieu
+                                <div>
+                                    Email: <span class="text-muted">nthieu1332002@gmail.com </span>
+                                </div>
+                            </td>
+                            <td class="text-muted">20/06/2022</td>
+                            <td>0945023429</td>
+                            <td><span class="badge bg-danger">Disapproved</span></td>
+                        </tr>
+                        <tr>
+                            <td>52</td>
+                            <td class="fw-bold">
+                                Nguyen Trung Hieu
+                                <div>
+                                    Email: <span class="text-muted">nthieu1332002@gmail.com </span>
+                                </div>
+                            </td>
+                            <td class="text-muted">15/06/2022</td>
+                            <td>0945023429</td>
+
+                            <td><span class="badge bg-info">Approved</span></td>
+                        </tr>
+                        <tr>
+                            <td>53</td>
+                            <td class="fw-bold">
+                                Nguyen Thien Nhan
+                                <div>
+                                    Email: <span class="text-muted">thiennhan@gmail.com </span>
+                                </div>
+                            </td>
+                            <td class="text-muted">12/06/2022</td>
+                            <td>0945023429</td>
+
+                            <td><span class="badge bg-info">Approved</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    @*<div class="col-4 mb-3">
+        <div class="card card-user">
+        <div class="card-body">
+        <div class="d-flex justify-content-between">
+        <div class="icon-user">
+        <i class="h3 fa-solid fa-user fw-bold"></i>
+        </div>
+        <div class="average-user text-center">
+        <h4 class="fw-bold text-primary">+50</h4>
+        <h5 class="fw-bold text-muted">New Users</h5>
+        </div>
+        </div>
+        </div>
+        <div class="user-chart-wrapper">
+        <canvas id="myUserChart"></canvas>
+        </div>
+        </div>
+        </div>*@
+    @*<div class="col-12">
+        <div class="card card-feedback col">
+        <div class="card-body">
+        <div class="d-flex justify-content-between">
+        <div class="icon-feedback">
+        <i class="h3 fa-solid fa-star fw-bold text-warning"></i>
+        </div>
+        <div class="average-feedback text-center">
+        <h4 class="fw-bold text-warning">~ 4.4</h4>
+        <h5 class="fw-bold text-muted">Feedback</h5>
+        </div>
+        </div>
+        <div class="feedback-chart-wrapper">
+        <canvas id="myFeedbackChart"></canvas>
+        </div>
+        </div>
+        </div>
+        </div>*@
+</div>
+<script>
+    //const ctx = document.getElementById('myRevenueChart');
+    //const myRevenueChart = new Chart(ctx, {
+    //    type: 'bar',
+    //    data: {
+    //        labels: ['Cate1', 'Cate2', 'Cate3', 'Cate4', 'Purple', 'Orange', 'Red', 'Blue'],
+    //        datasets: [{
+    //            label: 'Revenues',
+    //            data: [123123, 193131, 341413, 53121, 32332, 213123, 44412, 144135],
+    //            backgroundColor: [
+    //                'rgba(255, 99, 132,1)',
+    //                'rgba(54, 162, 235, 1)',
+    //                'rgba(255, 206, 86, 1)',
+    //                'rgba(75, 192, 192, 1)',
+    //                'rgba(153, 102, 255, 1)',
+    //                'rgba(255, 159, 64, 1)'
+    //            ],
+    //        }]
+    //    },
+    //    options: {
+    //        maintainAspectRatio: false,
+    //        plugins: {
+    //            legend: {
+    //                display: false
+    //            }
+    //        }
+    //    }
+    //});
+
+    //const ct = document.getElementById('myFeedbackChart');
+    //const myFeedbackChart = new Chart(ct, {
+    //    type: 'bar',
+    //    data: {
+    //        labels: ['Surgery', 'Medical Examination', 'Cardiology', 'Heart', 'Dragon', 'Service 1', 'Service 2'],
+    //        datasets: [{
+    //            label: 'Revenues',
+    //            data: [4.2, 3.9, 4.5, 4.9, 4.3, 4.5, 4.7],
+    //            backgroundColor: [
+    //                '#8212fa',
+    //                'rgba(54, 162, 235, 1)',
+    //                '#f7df1e',
+    //                '#61d9de',
+    //                '#e4293b'
+    //            ]
+    //        }]
+    //    },
+    //    options: {
+    //        maintainAspectRatio: false,
+    //        plugins: {
+    //            legend: {
+    //                display: false,
+    //            }
+    //        },
+    //    }
+    //});
+    const user = document.getElementById('myUserChart');
+    const myUserChart = new Chart(user, {
+        type: 'line',
+        data: {
+            labels: ['20/06/2022', '21/06/2022', '22/06/2022', 'Today'],
+            datasets: [{
+                data: [10, 8, 6, 12],
+                fill: false,
+                borderColor: '#3699ff',
+                tension: 0.5,
+                backgroundColor: '#3699ff',
+                fill: true,
+                backgroundColor: '#e2edff'
+            }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false,
+                }
+            },
+            scales: {
+                x: {
+                    display: false
+                },
+                y: {
+                    beginAtZero: true,
+                    display: false
+                }
+            }
+        }
+    });
+</script>

@@ -1,0 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
+@import "./root.css";
+
+.table > tbody > tr > td {
+  vertical-align: middle;
+  text-align: center;
+}
+
+.table > thead {
+  text-align: center;
+}
+
+.thumbnail {
+  height: 50px;
+  width: 50px;
+}

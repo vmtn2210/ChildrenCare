@@ -1,0 +1,91 @@
+﻿@using ChildrenCare.Utilities.Pagination
+@using ChildrenCare.DTOs.ServiceDTOs
+@using ChildrenCare.Entities
+@using ChildrenCare.Utilities
+@inject SignInManager<AppUser> SignInManager
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_Layout";
+    PagedList<GetServiceListResponseDTO> dto = ViewBag.ServiceList;
+    var serviceList = dto.Items.ToList();
+}
+<div class="service-list mt-5">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="service-list-title text-center">
+        <h5 class="text-primary">OUR SERVICES</h5>
+        <h2>Our Departments</h2>
+    </div>
+    <div class="action-sider my-3 d-flex justify-content-end">
+        <!--Sort by date-->
+        <div class="me-2">
+            <button class="btn btn-primary">Sort by updated date</button>
+        </div>
+        <!-- Search -->
+        <form asp-action="SearchService" method="get" class="searchbox w-25 me-4">
+            @*<div class="searchbox w-25 me-4">*@
+            <div class="input-group">
+                <input type="text" class="form-control" value="@ViewData["CurrentTitle"]" name="title" placeholder="Search..." autocomplete="off">
+                <div class="input-group-append">
+                    <button class="btn bg-primary text-white" typeof="submit">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+            </div>
+            @*</div>*@
+        </form>
+    </div>
+    <div class="service-list-wrapper mx-5">
+        @foreach (var service in serviceList)
+        {
+            @if (service.Status == GlobalVariables.ActiveServiceStatusId)
+            {
+                var imageSource = string.IsNullOrWhiteSpace(service.ThumbnailUrl) ? "https://wolper.com.au/wp-content/uploads/2017/10/image-placeholder.jpg" : service.ThumbnailUrl;
+                <div class="service-list-item d-flex my-3">
+                    <div class="service-list-img">
+                        <img src="@imageSource" alt="@service.Name" style="height: 225px; width: 225px;">
+                    </div>
+                    <div class="service-list-info ms-5 my-3">
+                        <h5 class="text-uppercase text-muted">@service.Name</h5>
+                        <h2>@service.Name</h2>
+                        <p class="service-description">@service.BriefInfo</p>
+                        <a asp-action="ServiceDetailCus" asp-route-id="@service.Id">View Detail <i class="fa-solid fa-arrow-right"></i></a>
+                        <a href="./" class="text-danger ms-2">Feedback <i class="fa-solid fa-comment-dots"></i></a>
+                    </div>
+                    <div class="service-price text-center mt-5 me-1">
+                        <h6 class="service-price-origin text-muted text-decoration-line-through">@service.Price VND</h6>
+                        <h3 class="service-price-sale text-primary">@service.SalePrice VND</h3>
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            if (User.IsInRole((GlobalVariables.CustomerRole)))
+                            {
+                                <a class="btn btn-sm btn-info" asp-action="AddService" asp-controller="Service" asp-route-id="@service.Id">
+                                    <i class="fa-solid fa-cart-arrow-down text-white"></i>
+                                </a>
+                            }
+                        }
+                        else
+                        {
+                            <p class="text-danger">You must login to order service!</p>
+                        }
+                    </div>
+                </div>
+            }
+        }
+        <nav class="d-flex justify-content-center">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="#">1</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">2</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">3</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+</div>

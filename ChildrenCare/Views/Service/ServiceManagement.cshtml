@@ -1,0 +1,184 @@
+﻿@model IEnumerable<ChildrenCare.Entities.Service>
+@using ChildrenCare.Utilities
+@{
+
+    if (User.IsInRole(GlobalVariables.ManagerRole))
+    {
+        Layout = "~/Views/Shared/_LayoutManager.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_LayoutError.cshtml";
+    }
+}
+<h1>Service Management</h1>
+<div class="height-100">
+    <div class="container">
+        <div class="action d-flex mb-3">
+
+            <form asp-controller="Service" asp-action="SearchServiceList" method="get">
+                <div class="col">
+                    <div class="input-group">
+                        <select class="form-select" name="status">
+                            @{
+                                string status = (ViewData["CurrentStatus"] ?? string.Empty) as string;
+                                if (!string.IsNullOrEmpty(status))
+                                {
+                                    if (status == "3")
+                                    {
+                                        <option value="">Status</option>
+                                        <option value="3" selected>Active</option>
+                                        <option value="4">Inactive</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="">Status</option>
+                                        <option value="3">Active</option>
+                                        <option value="4" selected>Inactive</option>
+                                    }
+                                }
+                                else
+                                {
+                                    <option value="" selected>Status</option>
+                                    <option value="3">Active</option>
+                                    <option value="4">Inactive</option>
+                                }
+                            }
+                        </select>
+                        <input type="text" name="title" value="@ViewData["CurrentTitle"]" class="form-control" placeholder="Title"/>
+                        <input type="text" name="briefInfo" value="@ViewData["CurrentBriefinfo"]" class="form-control" placeholder="Brief Info"/>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="submit">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="col">
+                <a asp-action="CreateService" class="btn btn-outline-primary float-end">+ New service</a>
+            </div>
+        </div>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>
+                    #
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BriefInfo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SalePrice)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreatedDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LastUpdated)
+                </th>
+                <th>
+                    Featured
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            @{
+                int i = 0;
+            }
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @{
+                            i++;
+                        }
+                        @i
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BriefInfo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SalePrice)
+                    </td>
+                    <td>
+                        @{
+                            if (item.Status == 3)
+                            {
+                                <div class="text-success">Active</div>
+                            }
+                            else if (item.Status == 4)
+                            {
+                                <div class="text-danger">Inactive</div>
+                            }
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreatedDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastUpdated)
+                    </td>
+                    <td>
+                        @switch (item.IsFeatured)
+                        {
+                            case (true):
+                                <p class="text-success">On</p>
+                                break;
+                            case (false):
+                                <p class="text-danger">Off</p>
+                                break;
+                        }
+                    </td>
+                    <td>
+                        <div class="dropdown">
+                            <a data-bs-toggle="dropdown">
+                                <i class="fa-solid fa-gear"></i>
+                            </a>
+                            <ul class="dropdown-menu ">
+                                <a class="dropdown-item" asp-action="UpdateService" asp-route-id="@item.Id">Update</a>
+                                <a class="dropdown-item" asp-action="ServiceDetail" asp-route-id="@item.Id">Detail</a>
+                                <a class="dropdown-item" asp-action="DeleteService" asp-route-id="@item.Id">Delete</a>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+
+        <nav>
+            <ul class="pagination justify-content-center">
+                <li class="page-item">
+                    <a class="page-link" href="#">1</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">2</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">3</a>
+                </li>
+            </ul>
+        </nav>
+
+
+    </div>
+</div>

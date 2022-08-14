@@ -1,0 +1,86 @@
+﻿@using ChildrenCare.Entities
+@model ChildrenCare.Entities.StaffSpecialization
+
+@{
+    Layout = "_LayoutManager";
+    List<StaffSpecialization> staffSpecializations = ViewBag.StaffSpecializations;
+    List<Service> services = ViewBag.Services;
+    List<AppUserRole> staffs = ViewBag.Staffs;
+}
+<div class="container">
+    <h1 class="text-center">Staff Specialization</h1>
+    <div class="choose-more-service mb-3">
+        <div class="col-2 me-1">
+            <div class="input-group">
+                <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Create Staff Specialization
+                </button>
+            </div>
+        </div>
+    </div>
+    <table class="table table-responsive text-center table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Staff</th>
+                <th scope="col">Service</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var detail in staffSpecializations)
+            {
+                <tr>
+                    <td>@detail.Staff.FullName</td>
+                    <td>@detail.Service.Name</td>
+                    <td>
+                        <form asp-controller="StaffSpecialization" asp-action="Delete" method="post">
+                            <input asp-for="ServiceId" value="@detail.ServiceId" type="hidden" />
+                            <input asp-for="StaffId" value="@detail.StaffId" type="hidden" />
+                            <button type="submit">
+                                <i class="btn text-danger fa-solid fa-trash-can"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <!-- Modal -->
+    <form asp-controller="StaffSpecialization" asp-action="Create" method="post">
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Create Staff Specialization</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <select asp-for="ServiceId" class="form-select" aria-label="Default select example">
+                                <option disabled selected> -- select a service -- </option>
+                                @foreach (var service in services)
+                                {
+                                    <option value="@(service.Id)">@service.Name</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <select asp-for="StaffId" class="form-select" aria-label="Default select example">
+                                <option disabled selected> -- select a staff -- </option>
+                                @foreach (var staff in staffs)
+                                {
+                                    <option value="@(staff.User.Id)">@staff.User.FullName</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,61 @@
+@using ChildrenCare.Entities
+@{
+    var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+    Layout = "_Layout";
+    List<ReservationDetail> reservationDetailList = ViewBag.ReservationDetailList;
+
+}
+<div class="container">
+
+    <div class="reservation-info text-center">
+        <h1 class="p-3">RESERVATION COMPLETION</h1>
+        <p>
+            Reservation has been submitted<br>We will send an email after your reservation has been approved<br>Your
+            reservation is as follows:<br>The number is necessary when checking or canceling your reservation, and when
+            the confirmation email is not received.
+        </p>
+    </div>
+
+    <table class="table table-responsive text-center">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Title</th>
+            <th scope="col">Price</th>
+            <th scope="col">Sale Price</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Number of person</th>
+            <th scope="col">Sub total cost</th>
+        </tr>
+        </thead>
+        <tbody>
+        @for (var i = 0; i < reservationDetailList.Count; i++)
+        {
+            var detail = reservationDetailList[i];
+            <tr>
+                <th scope="row">@i</th>
+                <td>@detail.Service.Name</td>
+                <td>@string.Format(format, "{0:c0}", @detail.BasePrice)</td>
+                <td>@string.Format(format, "{0:c0}", @detail.SalePrice)</td>
+                <td>@detail.Amount</td>
+                <td>@detail.NumberOfPeople</td>
+                <td class="text-danger fw-bold">@string.Format(format, "{0:c0}", @detail.SalePrice * detail.Amount)</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    <h3 class="text-danger float-end">Total: @string.Format(format, "{0:c0}", reservationDetailList.Sum(detail => detail.SalePrice * detail.Amount))</h3>
+    @for (var i = 0; i < 1; i++)
+    {
+        var detail = reservationDetailList[0];
+        <div class="your-note mt-2">
+            <p>
+                <span class="h5 text-warning">*Your note: </span>@detail.Reservation.Notes
+            </p>
+        </div>
+    }
+
+    <div class="submit mt-2 d-flex justify-content-center">
+        <a class="btn btn-outline-primary" asp-controller="Reservation" asp-action="MyReservation">Back</a>
+    </div>
+</div>

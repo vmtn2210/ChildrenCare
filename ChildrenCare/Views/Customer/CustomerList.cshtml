@@ -1,0 +1,157 @@
+﻿@using ChildrenCare.Utilities
+@model IEnumerable<ChildrenCare.Entities.AppUser>
+
+@{
+    ViewData["Title"] = "Index";
+    if (User.IsInRole(GlobalVariables.ManagerRole))
+    {
+        Layout = "~/Views/Shared/_LayoutManager.cshtml";
+    }
+    else if (User.IsInRole(GlobalVariables.AdministratorRole))
+    {
+        Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_LayoutError.cshtml";
+    }
+}
+
+
+<div class="container bg-white">
+    <h1>User List</h1>
+    <div class="action d-flex mb-3">
+        @* <form asp-controller="Service" asp-action="SearchServiceList" method="get"> *@
+        @*     <div class="col"> *@
+        @*         <div class="input-group"> *@
+        @*             <select class="form-select" name="status"> *@
+        @*                 @{ *@
+        @*                     string status = (ViewData["CurrentStatus"] ?? string.Empty) as string; *@
+        @*                     if (!string.IsNullOrEmpty(status)) *@
+        @*                     { *@
+        @*                         if (status == "3") *@
+        @*                         { *@
+        @*                             <option value="">Status</option> *@
+        @*                             <option value="3" selected>Active</option> *@
+        @*                             <option value="4">Inactive</option> *@
+        @*                         } *@
+        @*                         else *@
+        @*                         { *@
+        @*                             <option value="">Status</option> *@
+        @*                             <option value="3">Active</option> *@
+        @*                             <option value="4" selected>Inactive</option> *@
+        @*                         } *@
+        @*                     } *@
+        @*                     else *@
+        @*                     { *@
+        @*                         <option value="" selected>Status</option> *@
+        @*                         <option value="3">Active</option> *@
+        @*                         <option value="4">Inactive</option> *@
+        @*                     } *@
+        @*                 } *@
+        @*             </select> *@
+        @*             <input type="text" name="title" value="@ViewData["CurrentTitle"]" class="form-control" placeholder="Title"/> *@
+        @*             <input type="text" name="briefInfo" value="@ViewData["CurrentBriefinfo"]" class="form-control" placeholder="Brief Info"/> *@
+        @*             <div class="input-group-append"> *@
+        @*                 <button class="btn btn-outline-secondary" type="submit"> *@
+        @*                     <i class="fa fa-search"></i> *@
+        @*                 </button> *@
+        @*             </div> *@
+        @*         </div> *@
+        @*     </div> *@
+        @* </form> *@
+        <div class="col">
+            <a asp-action="AddCustomer" class="btn btn-outline-primary float-end">+ New Customer</a>
+        </div>
+    </div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>
+                    #
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FullName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Gender)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PhoneNumber)
+                </th>
+                <th>
+                    Status
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int i = 0;
+            }
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @{
+                            i++;
+                        }
+                        @i
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FullName)
+                    </td>
+                    <td>
+                        @{
+                            if (item.Gender == true)
+                            {
+                                <div class="text-success">Male</div>
+                            }
+                            else
+                            {
+                                <div class="text-warning">Female</div>
+                            }
+
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PhoneNumber)
+                    </td>
+                    <td>
+                        @{
+                            if (item.IsPotentialCustomer == false)
+                            {
+                                <div class="text-success">Active</div>
+                            }
+                            else
+                            {
+                                <div class="text-danger">Inactive</div>
+                            }
+
+                        }
+                    </td>
+                    <td>
+                        <div class="dropdown">
+                            <a data-bs-toggle="dropdown">
+                                <i class="fa-solid fa-gear"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <a class="dropdown-item" asp-action="EditCustomer" asp-route-id="@item.Id">Edit</a>
+                                <a class="dropdown-item" asp-action="DetailsCustomer" asp-route-id="@item.Id">Details</a>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

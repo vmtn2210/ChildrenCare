@@ -1,0 +1,185 @@
+﻿@using ChildrenCare.Entities
+@using ChildrenCare.DTOs.BlogDTOs
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_LayoutManager";
+    AdvancedGetBlogListResponseDTO dto = ViewBag.Blogs;
+    var bloglist = dto.Blogs.Items;
+    var managerList = ViewBag.ManagerList;
+}
+<h1>Blog Management</h1>
+<div class="height-100">
+    <div class="container">
+        <div class="action d-flex mb-3">
+            <form asp-action="SearchBlogManagement" method="get">
+                <div class="col">
+                    <div class="input-group">
+                        <select class="form-select" name="category">
+                            @{
+                                string category = (ViewData["CurrentCategory"] ?? string.Empty) as string;
+                                if (!string.IsNullOrEmpty(category))
+                                {
+                                    <option value="">Category</option>
+                                    @foreach (Category c in @ViewBag.Categories)
+                                    {
+                                        if (category == @c.Id.ToString())
+                                        {
+                                            <option value="@c.Id" selected>@c.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@c.Id">@c.Name</option>
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    <option value="" selected>Category</option>
+                                    @foreach (Category c in @ViewBag.Categories)
+                                    {
+                                        <option value="@c.Id">@c.Name</option>
+                                    }
+                                }
+                            }
+                        </select>
+
+                        <select class="form-select" name="status">
+                            @{
+                                string status = (ViewData["CurrentStatus"] ?? string.Empty) as string;
+                                if (!string.IsNullOrEmpty(status))
+                                {
+                                    if (status == "6")
+                                    {
+                                        <option value="">Status</option>
+                                        <option value="6" selected>Active</option>
+                                        <option value="7">Inactive</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="">Status</option>
+                                        <option value="6">Active</option>
+                                        <option value="7" selected>Inactive</option>
+                                    }
+                                }
+                                else
+                                {
+                                    <option value="" selected>Status</option>
+                                    <option value="6">Active</option>
+                                    <option value="7">Inactive</option>
+                                }
+                            }
+                        </select>
+                        <input name="title" type="text" value="@ViewData["CurrentTitle"]" class="form-control" placeholder="Title">
+                        <button class="btn btn-outline-secondary" type="submit">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <div class="col">
+                <a asp-area="" asp-controller="Blog" asp-action="CreateBlog" class="btn btn-outline-primary float-end">+ New post</a>
+            </div>
+        </div>
+
+        <!-- Table -->
+        <table class="table table-hover bg-white">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Thumbnail</th>
+                    <th scope="col">
+                        <a href="#" class="dropdown-toggle text-dark fw-bold">
+                            Title
+                        </a>
+                    </th>
+                    <th scope="col">
+                        <a href="#" class="dropdown-toggle text-dark fw-bold">
+                            Category
+                        </a>
+                    </th>
+                    <th scope="col">
+                        <a href="#" class="dropdown-toggle text-dark fw-bold">
+                            Author
+                        </a>
+                    </th>
+                    <th scope="col">
+                        <a href="#" class="dropdown-toggle text-dark fw-bold">
+                            Status
+                        </a>
+                    </th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (bloglist.Any())
+                {
+                    @foreach (var blog in bloglist)
+                    {
+                        <tr>
+                            <td>@blog.Id</td>
+
+                            <td>
+                                @if (String.IsNullOrWhiteSpace(blog.ThumbnailUrl))
+                                {
+                                    <p>Blog Doesn't have a thumbnail</p>
+                                }
+                                else
+                                {
+                                    <img class="thumbnail" src="@blog.ThumbnailUrl" alt="..">
+                                }
+                            </td>
+                            <td><a asp-controller="Blog" asp-action="BlogDetail" asp-route-id="@blog.Id">@blog.Tittle</a></td>
+                            <td>
+                                @foreach (Category categoryy in @ViewBag.Categories)
+                                {
+                                    if (blog.CategoryId == categoryy.Id)
+                                    {
+                                        @categoryy.Name
+                                    }
+                                }
+                            </td>
+                            <td>@blog.AuthorName</td>
+                            @* <td>Feature 1</td> *@
+                            <td>
+                                @{
+                                    if (blog.Status == 6)
+                                    {
+                                        <div class="text-success">Active</div>
+                                    }
+                                    else if (blog.Status == 7)
+                                    {
+                                        <div class="text-danger">Inactive</div>
+                                    }
+                                }
+                            </td>
+                            <td>
+                                <div class="dropdown">
+                                    <a data-bs-toggle="dropdown">
+                                        <i class="fa-solid fa-gear"></i>
+                                    </a>
+                                    <ul class="dropdown-menu ">
+                                        <a class="dropdown-item" asp-controller="Blog" asp-action="BlogDetailManager" asp-route-id="@blog.Id">
+                                        <li>View</li></a>
+                                        <a class="dropdown-item" asp-controller="Blog" asp-action="UpdateBlog" asp-route-id="@blog.Id">
+                                        <li>Edit</li></a>
+                                        <a class="dropdown-item" asp-controller="Blog" asp-action="DeleteBlog" asp-route-id="@blog.Id">
+                                        <li>Delete</li></a>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr><td colspan="10" class="text-danger">Not found!</td></tr>
+                }
+            </tbody>
+
+        </table>
+
+
+    </div>
+</div>

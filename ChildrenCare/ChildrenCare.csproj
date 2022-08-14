@@ -1,0 +1,61 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CloudinaryDotNet" Version="1.17.0" />
+    <PackageReference Include="Dapper" Version="2.0.123" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.5" />
+    <PackageReference Include="Microsoft.Build" Version="17.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.7" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="DTOs\AppUserDTOs\" />
+    <Folder Include="Migrations\" />
+    <Folder Include="Pages" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Blog\BlogManagement.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Blog\BlogManagement.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\StaffSpecialization\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Services\MailService.cs" />
+    <Compile Remove="Services\Interface\IMailService.cs" />
+    <None Include="wwwroot\images\background.png" />
+    <None Include="wwwroot\images\doctor.png" />
+    <None Include="wwwroot\images\hotblog.jpg" />
+    <None Include="wwwroot\images\slider.png" />
+    <None Include="wwwroot\images\surgery.jpg" />
+    <None Include="wwwroot\images\wave.png" />
+    <Compile Remove="Pages\StaffSpecialization\**" />
+    <None Remove="Pages\StaffSpecialization\**" />
+    <Compile Remove="Views\StaffSpecialization\Index.cshtml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Pages\StaffSpecialization\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Pages\StaffSpecialization\**" />
+  </ItemGroup>
+
+</Project>

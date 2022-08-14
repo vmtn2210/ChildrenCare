@@ -1,0 +1,173 @@
+﻿@using ChildrenCare.Utilities
+@model ChildrenCare.Entities.AppUser
+
+@{
+    ViewData["Title"] = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section id="user-profile">
+    <div class="container mb-5">
+        <div class="nav-sub">
+            <nav class="nav">
+                <a class="nav-link" asp-controller="Home" asp-action="Profile">Your Information</a>
+                <a class="nav-link" asp-action="ChangePassword">Change Password</a>
+            </nav>
+        </div>
+        <h3 class="fw-bold mt-3">Account Information</h3>
+        <div class="user-profile-wrapper mt-3">
+            <div class="row p-5">
+                <div class="user-role col-4 d-flex flex-column justify-content-center align-items-center">
+                    @*<div class="user-img-border d-flex justify-content-center align-items-center mb-1">
+                        <div class="user-img bg-info d-flex justify-content-center">
+                        <img class="rounded" src="./images/doctor.png" alt=".">
+                        </div>
+                        <label for="image-upload"
+                        class="icon-camera d-flex justify-content-center align-items-center">
+                        <i class="fa fa-camera text-white"></i>
+                        <input type="file" id="image-upload" accept="image/x-png,image/gif,image/jpeg">
+                        </label>
+                        </div>*@
+                    <div class="user-info text-center">
+                        <h4 class="text-capitalize text-primary mb-1">@Html.DisplayFor(model => model.FullName)</h4>
+                        @{
+                            if (@User.IsInRole(GlobalVariables.CustomerRole))
+                            {
+                                <h5 class="text-uppercase text-danger">Customer</h5>
+                            }
+                            if (@User.IsInRole(GlobalVariables.ManagerRole))
+                            {
+                                <h5 class="text-uppercase text-danger">Manager</h5>
+                            }
+                            if (@User.IsInRole(GlobalVariables.AdministratorRole))
+                            {
+                                <h5 class="text-uppercase text-danger">Admin</h5>
+                            }
+                            if (@User.IsInRole(GlobalVariables.DoctorRole))
+                            {
+                                <h5 class="text-uppercase text-danger">Doctor</h5>
+                            }
+                            if (@User.IsInRole(GlobalVariables.NurseRole))
+                            {
+                                <h5 class="text-uppercase text-danger">Nurse</h5>
+                            }
+                        }
+                    </div>
+                </div>
+                <div class="user-detail px-5 col-8">
+                    <h5>Your information</h5>
+                    @*<form class="row mt-4" asp-action="Profile">*@
+                    <form asp-action="EditCustomerEdit" method="post" class="row mt-4">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="Id" />
+                        <div class="col-12">
+                            <label asp-for="FullName" class="form-label">Full Name</label>
+                            <input asp-for="FullName" class="form-control">
+                            <span asp-validation-for="FullName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Gender" class="control-label"></label>
+                            <select class="form-select" asp-for="Gender">
+                                <option value="true">Male</option>
+                                <option value="false">Female</option>
+                            </select>
+                            <span asp-validation-for="Gender" class="text-danger"></span>
+                        </div>
+                        <div class="form-group form-check">
+                            <label class="form-check-label" hidden>
+                                <input class="form-check-input" asp-for="IsPotentialCustomer" /> @Html.DisplayNameFor(model => model.IsPotentialCustomer)
+                            </label>
+                        </div>
+                        <input asp-for="UserName" type="hidden" class="w-100">
+                        <span asp-validation-for="UserName" class="text-danger"></span>
+                        <div class="form-group" hidden>
+                            <label asp-for="NormalizedUserName" class="control-label"></label>
+                            <input asp-for="NormalizedUserName" class="form-control" />
+                            <span asp-validation-for="NormalizedUserName" class="text-danger"></span>
+                        </div>
+                        <div class="col-12">
+                            <label asp-for="Email" class="form-label">Email</label>
+                            <input asp-for="Email" type="text" class="form-control" id="email" readonly>
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group" hidden>
+                            <label asp-for="NormalizedEmail" class="control-label"></label>
+                            <input asp-for="NormalizedEmail" class="form-control" />
+                            <span asp-validation-for="NormalizedEmail" class="text-danger"></span>
+                        </div>
+                        <div class="form-group form-check" hidden>
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="EmailConfirmed" /> @Html.DisplayNameFor(model => model.EmailConfirmed)
+                            </label>
+                        </div>
+                        <div class="form-group" hidden>
+                            <label asp-for="PasswordHash" class="control-label"></label>
+                            <input asp-for="PasswordHash" class="form-control" />
+                            <span asp-validation-for="PasswordHash" class="text-danger"></span>
+                        </div>
+                        <div class="form-group" hidden>
+                            <label asp-for="SecurityStamp" class="control-label"></label>
+                            <input asp-for="SecurityStamp" class="form-control" />
+                            <span asp-validation-for="SecurityStamp" class="text-danger"></span>
+                        </div>
+                        <div class="form-group" hidden>
+                            <label asp-for="ConcurrencyStamp" class="control-label"></label>
+                            <input asp-for="ConcurrencyStamp" class="form-control" />
+                            <span asp-validation-for="ConcurrencyStamp" class="text-danger"></span>
+                        </div>
+                        <div class="col-12">
+                            <label asp-for="PhoneNumber" class="form-label">Phone Number</label>
+                            <input asp-for="PhoneNumber" type="text" class="form-control" id="phone-number">
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group form-check" hidden>
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="PhoneNumberConfirmed" /> @Html.DisplayNameFor(model => model.PhoneNumberConfirmed)
+                            </label>
+                        </div>
+                        <div class="form-group form-check" hidden>
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="TwoFactorEnabled" /> @Html.DisplayNameFor(model => model.TwoFactorEnabled)
+                            </label>
+                        </div>
+                        <div class="form-group" hidden>
+                            <label asp-for="LockoutEnd" class="control-label"></label>
+                            <input asp-for="LockoutEnd" class="form-control" />
+                            <span asp-validation-for="LockoutEnd" class="text-danger"></span>
+                        </div>
+                        <div class="form-group form-check" hidden>
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="LockoutEnabled" /> @Html.DisplayNameFor(model => model.LockoutEnabled)
+                            </label>
+                        </div>
+
+                        <div class="form-group" hidden>
+                            <label asp-for="AccessFailedCount" class="control-label"></label>
+                            <input asp-for="AccessFailedCount" class="form-control" />
+                            <span asp-validation-for="AccessFailedCount" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-12">
+                            <button type="submit" value="Save" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                </div>
+                @*<div class="change-password px-5 col-8">
+                    <h5>Change password</h5>
+                    <form class="row mt-4" asp-action="SubmitChangePassword">
+                    <div class="form-group">
+                    <input type="password" name="NewPassword" value="@ViewData["CurrentFilter"]" class="form-control" placeholder="Search name"/>
+                    </div>
+                    <div class="form-group">
+                    <input type="password" name="ConfirmPassword" value="@ViewData["CurrentFilter"]" class="form-control" placeholder="Search name"/>
+                    </div>
+                    <div class="col-12">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                    </form>
+                    </div>*@
+
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,50 @@
+﻿@using ChildrenCare.Entities
+@model ChildrenCare.Entities.Service
+@inject SignInManager<AppUser> SignInManager
+@{
+    Layout = "_Layout";
+}
+
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-5" style="height: 500px; width: 500px">
+            <img src="@Html.DisplayFor(model => model.ThumbnailUrl)" style="height: auto; width: 100%" />
+        </div>
+        <div class="col-7">
+            <h1>@Html.DisplayFor(model => model.Name)</h1>
+            <h5 class="text-decoration-line-through">Origin Price: @Html.DisplayFor(model => model.Price) VND</h5>
+            <h4 class="text-danger">Super Sale Price: @Html.DisplayFor(model => model.SalePrice) VND</h4>
+            @Html.DisplayFor(model => model.BriefInfo)
+            <div class="mt-5">
+                <p>@Html.DisplayFor(model => model.Description)</p>
+            </div>
+
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <a class="btn btn-lg btn-info text-white" asp-action="AddService" asp-controller="Service" asp-route-id="@Model.Id">Add to cart!</a>
+            }
+            else
+            {
+                <p class="text-danger">You must login to order service!</p>
+            }
+
+        </div>
+    </div>
+    @*<div class="blog-detail-wrapper mt-5">
+        <div class="blog-detail-title text-center">
+        <h1>@Html.DisplayFor(model => model.Name)</h1>
+        </div>
+        <div class="flex">
+        <div class="blog-detail-info float-end text-center text-muted fst-italic">
+        <h5>@Html.DisplayFor(model => model.SalePrice)</h5>
+        <h6>@Html.DisplayFor(model => model.Price)</h6>
+        </div>
+        <div class="blog-detail-details mt-5">
+        @Html.DisplayFor(model => model.Description)
+        </div>
+        <div class="">
+        <img src="@Html.DisplayFor(model => model.ThumbnailUrl)" style="height: 500px; width: 500px" alt="d"/>
+        </div>
+        </div>
+        </div>*@
+</div>

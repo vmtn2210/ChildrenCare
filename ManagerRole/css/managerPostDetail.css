@@ -1,0 +1,16 @@
+@import "./root.css";
+
+body {
+    background-color: #f6f6f6;
+}
+
+.post-detail-wrapper {
+    width: 800px;
+    height: auto;
+    background-color: rgb(255, 255, 255);
+    border-radius: 0.8rem;
+}
+
+.title {
+    font-weight: 600;
+}

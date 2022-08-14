@@ -1,0 +1,131 @@
+﻿@model ChildrenCare.Entities.Service
+@using ChildrenCare.Utilities
+@{
+
+    if (User.IsInRole(GlobalVariables.ManagerRole))
+    {
+        Layout = "~/Views/Shared/_LayoutManager.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_LayoutError.cshtml";
+    }
+}
+
+<div class="height-100 d-flex justify-content-center align-items-center">
+    <div class="post-detail-wrapper mx-5 px-5 py-5">
+        <div class="return">
+            <a asp-controller="Service" asp-action="ServiceManagement"><i class='bx bxs-chevron-left bx-flip-vertical'></i> Back</a>
+        </div>
+        <form asp-action="UpdateService">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="post-content">
+                <h2>Edit Service</h2>
+                <div class="row mb-2">
+                    <div class="col-4 title">
+                        Name
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Name" type="text" class="w-100">
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-4 title">
+                        Description
+                    </div>
+                    <div class="col-8">
+                        <textarea asp-for="Description" type="text" class="w-100" style="min-height: 120px"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-4 title">
+                        BriefInfo
+                    </div>
+                    <div class="col-8">
+                        <textarea asp-for="BriefInfo" type="text" class="w-100" style="min-height: 60px"></textarea>
+                        <span asp-validation-for="BriefInfo" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-4 title">
+                        Price
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Price" type="text" class="w-100">
+                        <span asp-validation-for="Price" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-4 title">
+                        Saled Price
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="SalePrice" type="text" class="w-100">
+                        <span asp-validation-for="SalePrice" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-4 title">
+                        Status
+                    </div>
+                    <div class="col-8">
+                        <select class="form-select" asp-for="Status" aria-label="Select Status">
+                            <option value="3">Active</option>
+                            <option value="4">Inactive</option>
+                        </select>
+                        @*<input asp-for="Status" type="text" class="w-100">*@
+                        <span asp-validation-for="Status" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-4 title">
+                        ThumbnailUrl
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="ThumbnailUrl" type="text" class="w-100">
+                        <span asp-validation-for="ThumbnailUrl" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-4 title">
+                        Created Date
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="CreatedDate" type="text" class="w-100" readonly>
+                        <span asp-validation-for="CreatedDate" class="text-danger"></span>
+                    </div>
+                </div>
+
+                @{
+                    Model.LastUpdated = DateTime.Now;
+                }
+                <input asp-for="LastUpdated" type="hidden" class="w-100">
+                <span asp-validation-for="LastUpdated" class="text-danger"></span>
+
+                <div class="row mb-2">
+                    <div class="col-4 title">
+                        Feature?
+                    </div>
+                    <div class="col-8">
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="IsFeatured" /> @Html.DisplayNameFor(model => model.IsFeatured)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" value="Save" class="btn btn-primary">Submit</button>
+            <h6>@TempData["Success"]</h6>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}

@@ -1,0 +1,68 @@
+﻿@using ChildrenCare.Utilities
+@model ChildrenCare.Entities.Blog
+
+@{
+    ViewData["Title"] = "Delete Blog";
+    Layout = "~/Views/Shared/_LayoutManager.cshtml";
+}
+
+<h1>Blog Detail</h1>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            Title
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Tittle)
+        </dd>
+        <dt class="col-sm-2">
+            Brief Info
+        </dt>
+        <dt class="col-sm-10">
+            @Html.DisplayFor(model => model.BriefInfo)
+        </dt>
+        <dt class="col-sm-2">
+            Status
+        </dt>
+        <dd class = "col-sm-10">
+            @{
+                if (Model.Status.ToString() == "6")
+                {
+                    <div class="text-success">Active</div>
+                }
+                else
+                {
+                    <div class="text-danger">Inactive</div>
+                }
+                }
+        </dd>
+        <dt class="col-sm-2">
+            Description
+        </dt>
+        <dd class="col-sm-10">
+            <textarea class="w-100" style="min-height: 200px" disabled>
+                @Html.DisplayFor(model => model.BlogBody)
+            </textarea>
+        </dd>
+        <dt class="col-sm-2">
+            Image
+        </dt>
+        <dd class="col-sm-10">
+            <img src="@Model.ThumbnailUrl" alt="@Model.ThumbnailUrl" class="rounded float-start" style="width: 200px"/>
+        </dd>
+        <dt class="col-sm-2">
+            Created Date
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+        <dt class="col-sm-2">
+            Last Updated
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.LastUpdate)
+        </dd>
+    </dl>
+    <button class="btn btn-primary" asp-action="BlogManagement">Back to List</button>
+</div>

@@ -1,0 +1,42 @@
+﻿@model ChildrenCare.Entities.Prescription
+
+@{
+    ViewData["Title"] = "DetailsPescriptions";
+    Layout = "~/Views/Shared/_LayoutStaff.cshtml";
+}
+
+<h1>Pescription Details</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CustomerAccount)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CustomerAccount.FullName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AuthorAccount)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AuthorAccount.FullName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PrescriptionContent)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PrescriptionContent)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+    </dl>
+</div>
+@*<div>
+    <a asp-action="UpdatePrescriptions" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="PrescriptionsList">Back to List</a>
+</div>*@

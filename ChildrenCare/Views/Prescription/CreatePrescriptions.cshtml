@@ -1,0 +1,34 @@
+﻿@model ChildrenCare.Entities.Prescription
+
+@{
+    ViewData["Title"] = "CreatePrescriptions";
+    Layout = "~/Views/Shared/_LayoutStaff.cshtml";
+}
+
+<h1>CreatePrescriptions</h1>
+
+<h4>Prescription</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="SubmitCreatePrescription" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ReservationId" class="control-label"></label>
+                <input asp-for="ReservationId" class="form-control" contenteditable="false" readonly/>
+            </div>
+            <div class="form-group">
+                <label asp-for="PrescriptionContent" class="control-label"></label>
+                <textarea asp-for="PrescriptionContent" class="form-control" rows="5"></textarea>
+                <span asp-validation-for="PrescriptionContent" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

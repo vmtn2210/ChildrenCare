@@ -1,0 +1,178 @@
+﻿@model IEnumerable<ChildrenCare.Entities.Slider>
+@using ChildrenCare.Utilities
+@{
+    ViewData["Title"] = "SliderList";
+
+    if (User.IsInRole(GlobalVariables.ManagerRole))
+    {
+        Layout = "~/Views/Shared/_LayoutManager.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_LayoutError.cshtml";
+    }
+}
+
+<h1>Slider List</h1>
+
+<div class="height-100">
+    <div class="container">
+        <div class="action d-flex mb-3">
+
+
+            <form asp-controller="Slider" asp-action="SearchSliderList" method="get">
+
+                <div class="col">
+                    <div class="input-group">
+                        <select class="form-select" name="status">
+                            @{
+                                string status = (ViewData["CurrentStatus"] ?? string.Empty) as string;
+                                if (!string.IsNullOrEmpty(status))
+                                {
+                                    if (status == "1")
+                                    {
+                                        <option value="">Status</option>
+                                        <option value="1" selected>Active</option>
+                                        <option value="2">Inactive</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="">Status</option>
+                                        <option value="1">Active</option>
+                                        <option value="2" selected>Inactive</option>
+                                    }
+                                }
+                                else
+                                {
+                                    <option value="" selected>Status</option>
+                                    <option value="1">Active</option>
+                                    <option value="2">Inactive</option>
+                                }
+                            }
+                        </select>
+                        <input type="text" name="title" value="@ViewData["CurrentTitle"]" class="form-control" placeholder="Title" />
+                        <input type="text" name="backlink" value="@ViewData["CurrentBacklink"]" class="form-control" placeholder="Back link" />
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="submit">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            @*<div class="input-group">
+                <input type="text" class="form-control" placeholder="Title">
+                <button class="btn btn-outline-secondary" type="button">
+                <i class="fa fa-search"></i>
+                </button>
+                </div>*@
+
+            <div class="col">
+                <a asp-action="CreateSlider" class="btn btn-outline-primary float-end">+ New slider</a>
+            </div>
+        </div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        #
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Title)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </th>
+                    @* <th> *@
+                    @*     @Html.DisplayNameFor(model => model.BackLink) *@
+                    @* </th> *@
+                    <th>
+                        @Html.DisplayNameFor(model => model.ThumbnailUrl)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CreatedDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LastUpdate)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int i = 0;
+                }
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @{
+                                i++;
+                            }
+                            @i
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            @{
+                                if (item.Status == 1)
+                                {
+                                    <div class="text-success">Active</div>
+                                }
+                                else if (item.Status == 2)
+                                {
+                                    <div class="text-danger">Inactive</div>
+                                }
+                            }
+                        </td>
+                        <td hidden>
+                            @Html.DisplayFor(modelItem => item.BackLink)
+                        </td>
+                        <td>
+                            @if (String.IsNullOrWhiteSpace(item.ThumbnailUrl))
+                    {
+                        <p>Doesn't have a thumbnail</p>
+                    }
+                    else
+                    {
+                        <img class="thumbnail" src="@item.ThumbnailUrl">
+                    }
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreatedDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LastUpdate)
+                        </td>
+                        <td>
+                            <div class="dropdown">
+                                <a data-bs-toggle="dropdown">
+                                    <i class="fa-solid fa-gear"></i>
+                                </a>
+                                <ul class="dropdown-menu ">
+                                    <a class="dropdown-item" asp-action="UpdateSlider" asp-route-id="@item.Id">Update</a>
+                                    <a class="dropdown-item" asp-action="SliderDetails" asp-route-id="@item.Id">Details</a>
+                                    <a class="dropdown-item" asp-action="DeleteSlider" asp-route-id="@item.Id">Delete</a>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <nav>
+            <ul class="pagination justify-content-center">
+                <li class="page-item">
+                    <a class="page-link" href="#">1</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">2</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">3</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>

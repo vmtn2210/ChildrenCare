@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="./css/homepage.css">
+    <title>Blog List | Medic</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-white">
+        <div class="container">
+            <a class="navbar-brand" href="./homepage.html">Medic</a>
+            <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav">
+                <i class="navbar-icon fa-solid fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./homepage.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./servicelist.html">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./bloglist.html">Blogs</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="navbar-action float-end">
+                <a href="#">Get started?</a>
+            </div>
+        </div>
+    </nav>
+    <div class="blog-list mt-5">
+        <div class="blog-list-title text-center">
+            <h2>All Our Blogs</h2>
+        </div>
+        <div class="action-sider my-3 d-flex justify-content-end">
+            <!--Sort by date-->
+            <button class="btn btn-primary me-2">Sort by updated date</button>
+            <!-- Category -->
+            <div class="categorybox">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownCategory"
+                    data-bs-toggle="dropdown">
+                    Category
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownCategory">
+                    <li><a class="dropdown-item" href="#">Cate 1</a></li>
+                    <li><a class="dropdown-item" href="#">Cate 2</a></li>
+                    <li><a class="dropdown-item" href="#">Cate 3</a></li>
+                </ul>
+            </div>
+            <!-- Search -->
+            <div class="searchbox w-25 me-4">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search..." autocomplete="off">
+                    <div class="btn bg-primary text-white"><i class="fa-solid fa-magnifying-glass"></i></div>
+                </div>
+            </div>
+        </div>
+        <div class="blog-list-wrapper">
+            <a class="blog-list-item" href="./blogdetails.html">
+                <div class="blog-item-img">
+                    <img src="./images/hotblog.jpg" alt="1">
+                </div>
+                <div class="blog-item-title">
+                    <p>When thinking about clinical trial documentation compliance.</p>
+                </div>
+            </a>
+            <a class="blog-list-item">
+                <div class="blog-item-img">
+                    <img src="./images/hotblog.jpg" alt="1">
+                </div>
+                <div class="blog-item-title">
+                    <p>When thinking about clinical trial documentation compliance.</p>
+                </div>
+            </a>
+            <a class="blog-list-item">
+                <div class="blog-item-img">
+                    <img src="./images/hotblog.jpg" alt="1">
+                </div>
+                <div class="blog-item-title">
+                    <p>When thinking about clinical trial documentation compliance.</p>
+                </div>
+            </a>
+            <a class="blog-list-item">
+                <div class="blog-item-img">
+                    <img src="./images/hotblog.jpg" alt="1">
+                </div>
+                <div class="blog-item-title">
+                    <p>When thinking about clinical trial documentation compliance.</p>
+                </div>
+            </a>
+        </div>
+        <nav class="d-flex justify-content-center">
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+            </ul>
+        </nav>
+    </div>
+
+</body>
+
+</html>

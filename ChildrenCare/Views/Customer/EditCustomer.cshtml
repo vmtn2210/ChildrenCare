@@ -1,0 +1,198 @@
+﻿@using ChildrenCare.Utilities
+@model ChildrenCare.Entities.AppUser
+
+@{
+    if (User.IsInRole(GlobalVariables.ManagerRole))
+    {
+        Layout = "~/Views/Shared/_LayoutManager.cshtml";
+    }
+    else if (User.IsInRole(GlobalVariables.AdministratorRole))
+    {
+        Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_LayoutError.cshtml";
+    }
+}
+
+<div class="height-100 d-flex justify-content-center align-items-center">
+    <div class="post-detail-wrapper mx-5 px-5 py-5">
+        <div class="return">
+            <a asp-controller="Customer" asp-action="CustomerList"><i class='bx bxs-chevron-left bx-flip-vertical'></i> Back</a>
+        </div>
+        <form asp-action="EditCustomerEdit" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="post-content">
+                <h2>Edit Customer</h2>
+                <div class="row mb-2">
+                    <div class="col-4 title">
+                        Full Name
+                    </div>
+                    <div class="col-8">
+                        @{
+                            if (User.IsInRole(GlobalVariables.ManagerRole))
+                            {
+                                <input asp-for="FullName" type="text" class="w-100">
+                                <span asp-validation-for="FullName" class="text-danger"></span>
+                            }
+                            else if (User.IsInRole(GlobalVariables.AdministratorRole))
+                            {
+                                <input asp-for="FullName" type="text" class="w-100" readonly>
+                            }
+
+                        }
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-4 title">
+                        Gender
+                    </div>
+                    <div class="col-8">
+                        @{
+                            if (User.IsInRole(GlobalVariables.ManagerRole))
+                            {
+                                <select class="form-select" asp-for="Gender">
+                            <option value="true">Male</option>
+                            <option value="false">Female</option>
+                        </select>
+                            }
+                            else if (User.IsInRole(GlobalVariables.AdministratorRole))
+                            {
+                                <select class="form-select" asp-for="Gender" disabled>
+                            <option value="true">Male</option>
+                            <option value="false">Female</option>
+                        </select>
+                            }
+
+                        }
+                        
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-4 title">
+                        Status
+                    </div>
+                    <div class="col-8">
+                        <select class="form-select" asp-for="IsPotentialCustomer">
+                            <option value="false">Active</option>
+                            <option value="true">Inactive</option>
+                        </select>
+                    </div>
+                </div>
+                <input asp-for="UserName" type="hidden" class="w-100">
+                <span asp-validation-for="UserName" class="text-danger"></span>
+
+                <div class="form-group" hidden>
+                    <label asp-for="NormalizedUserName" class="control-label"></label>
+                    <input asp-for="NormalizedUserName" class="form-control" />
+                    <span asp-validation-for="NormalizedUserName" class="text-danger"></span>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-4 title">
+                        Email
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Email" type="text" class="w-100" readonly>
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group" hidden>
+                    <label asp-for="NormalizedEmail" class="control-label"></label>
+                    <input asp-for="NormalizedEmail" class="form-control" />
+                    <span asp-validation-for="NormalizedEmail" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check" hidden>
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="EmailConfirmed" /> @Html.DisplayNameFor(model => model.EmailConfirmed)
+                    </label>
+                </div>
+                <div class="form-group" hidden>
+                    <label asp-for="PasswordHash" class="control-label"></label>
+                    <input asp-for="PasswordHash" class="form-control" />
+                    <span asp-validation-for="PasswordHash" class="text-danger"></span>
+                </div>
+                <div class="form-group" hidden>
+                    <label asp-for="SecurityStamp" class="control-label"></label>
+                    <input asp-for="SecurityStamp" class="form-control" />
+                    <span asp-validation-for="SecurityStamp" class="text-danger"></span>
+                </div>
+                <div class="form-group" hidden>
+                    <label asp-for="ConcurrencyStamp" class="control-label"></label>
+                    <input asp-for="ConcurrencyStamp" class="form-control" />
+                    <span asp-validation-for="ConcurrencyStamp" class="text-danger"></span>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-4 title">
+                        Phone number
+                    </div>
+                    <div class="col-8">
+                        @{
+                            if (User.IsInRole(GlobalVariables.ManagerRole))
+                            {
+                                <input asp-for="PhoneNumber" type="text" class="w-100">
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                            }
+                            else if (User.IsInRole(GlobalVariables.AdministratorRole))
+                            {
+                                <input asp-for="PhoneNumber" type="text" class="w-100" readonly>
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                            }
+
+                        }
+                        
+                    </div>
+                </div>
+                <div class="form-group form-check" hidden>
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="PhoneNumberConfirmed" /> @Html.DisplayNameFor(model => model.PhoneNumberConfirmed)
+                    </label>
+                </div>
+                <div class="form-group form-check" hidden>
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="TwoFactorEnabled" /> @Html.DisplayNameFor(model => model.TwoFactorEnabled)
+                    </label>
+                </div>
+                <div class="form-group" hidden>
+                    <label asp-for="LockoutEnd" class="control-label"></label>
+                    <input asp-for="LockoutEnd" class="form-control" />
+                    <span asp-validation-for="LockoutEnd" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check" hidden>
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="LockoutEnabled" /> @Html.DisplayNameFor(model => model.LockoutEnabled)
+                    </label>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-4 title">
+                        Role
+                    </div>
+                    <div class="col-8">
+                        <select class="form-select" name="InputRole" aria-label="Select Role" asp-for="UserRoles.First().Role.Name">
+                            <option value="admin">Admin</option>
+                            <option value="manager">Manager</option>
+                            <option value="doctor">Doctor</option>
+                            <option value="nurse">Nurse</option>
+                            <option value="customer">Customer</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group" hidden>
+                    <label asp-for="AccessFailedCount" class="control-label"></label>
+                    <input asp-for="AccessFailedCount" class="form-control" />
+                    <span asp-validation-for="AccessFailedCount" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}

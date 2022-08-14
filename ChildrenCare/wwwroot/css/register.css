@@ -1,0 +1,133 @@
+﻿html {
+    font-family: 'Hanalei Fill', cursive;
+    font-size: 62.5%;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    height: 100%;
+    width: auto;
+    background: url("../images/background.png") no-repeat center center fixed;
+    background-size: cover;
+    overflow: hidden;
+}
+
+.container {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height: auto;
+    width: auto;
+}
+
+.text-danger {
+    color: red;
+    font-weight:bold;
+}
+
+.signup {
+    text-align: center;
+    background: transparent;
+    border: none;
+    width: 100%;
+    height: 100%;
+}
+
+.h1 {
+    font-weight: 900;
+    font-size: 30px;
+    color: rgb(46, 46, 46);
+}
+
+.inputform {
+    max-width: 470px;
+    min-width: 300px;
+}
+
+@media (max-width: 768px) {
+    .inputform {
+        margin: 0;
+    }
+}
+
+
+.sign-up-input {
+    background: #f7f7f7;
+    height: 100%;
+    width: 100%;
+    margin: 10px;
+    padding: 12px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    border: 1px solid rgb(112, 112, 112);
+}
+
+.submit {
+    font-family: 'Kufam', cursive;
+    background: #74c3cd;
+    height: 100%;
+    width: 100%;
+    margin: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.25s;
+    text-align: center;
+    color: #fff;
+}
+
+    .submit:hover {
+        background: #7dd0db;
+    }
+
+
+.signin {
+    text-align: center;
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+}
+
+a {
+    font-style: normal;
+    text-decoration: none;
+    color: blue;
+}
+
+    a:hover {
+        font-style: italic;
+        color: rgb(173, 8, 238);
+    }
+
+.or {
+    text-align: center;
+    color: gray;
+    position: relative;
+}
+
+    .or span {
+        display: inline-block;
+        padding-left: 10px;
+        padding-right: 10px;
+        background-color: #fff;
+        position: relative;
+        z-index: 1;
+    }
+
+    .or::after {
+        content: "";
+        width: 40%;
+        height: 1px;
+        background-color: #999;
+        position: absolute;
+        top: 50%;
+        left: 30%;
+    }
+
+.return {
+    padding-bottom: 5%;
+}

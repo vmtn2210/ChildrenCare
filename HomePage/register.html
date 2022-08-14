@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/register.css">
+</head>
+<body>
+    <div class="container">
+        <div class="signup">
+            <h1><span class="h1">Create Account</span></h1>
+            <form action="mainController" method="post" class="inputform">
+                <input type="email" name="email" required autocomplete="off" class="sign-up-input" placeholder="Email">
+                <input type="password" name="password" required pattern="[A-Za-z0-9]+" title="Do not contain blank!" autocomplete="off" class="sign-up-input" placeholder="Password">
+                <input type="text" name="fullname" required pattern="(.|\s)*\S(.|\s)*" title="Cannot be blank!" class="sign-up-input" placeholder="Full name">
+                <select name="gender" class="sign-up-input">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                  </select>
+                <input type="text" name="phone" required pattern="[0-9]{1,10}" title="Phone is maximum 10 numbers" autocomplete="off" class="sign-up-input" placeholder="Phone"/>
+                <input type="text" name="address" required autocomplete="off" class="sign-up-input" placeholder="Address"/>
+                <button value="register" name="action" class="submit">CREATE</button>
+            </form>
+            <span class="signin"><p>Already have an account?<a href="./login.html"> Login here</a></p></span>
+            <div class="or"><span> Or </span></div>
+            <div class="return"><a href="./homepage.html">Return home</a></div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,133 @@
+@using ChildrenCare.Utilities.Pagination
+@using ChildrenCare.DTOs.ReservationDTOs
+@using ChildrenCare.Utilities
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_LayoutStaff";
+    AdvancedGetReservationResponseDTO dto = ViewBag.ReservationList;
+    var reservationList = dto.Reservations.Items;
+    var statusList = dto.AppParameters;
+}
+<div class="container bg-white">
+    <h1 class="text-center">User Reservation</h1>
+    <div class="choose-more-service mb-3">
+
+        <form asp-action="ReservationSearch" method="get">
+            <div class="col-2 me-1">
+                <div class="input-group">
+                    <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" class="form-control" placeholder="Search name" />
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        @*<form asp-action="ReservationSearch" method="get">
+            <div class="form-actions no-color">
+            <p>
+            Find by name: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+            <input type="submit" value="Search" class="btn btn-default" />
+            </p>
+            </div>
+            </form>*@
+    </div>
+    @if (reservationList.Any())
+    {
+        <table class="table table-responsive text-center">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Customer Id</th>
+                    <th scope="col">Customer Name</th>
+                    <th scope="col">Reserved Date</th>
+                    <th scope="col">Service Number</th>
+                    <th scope="col">Created Date</th>
+                    <th scope="col">Last Updated Date</th>
+                    <th scope="col">Total cost</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var reservation in reservationList)
+                {
+                    var actualPrice = @reservation.ActualTotalPrice + " VND";
+                    <tr>
+                        <th scope="row">
+                            <a asp-controller="Reservation" asp-action="ReservationDetail" asp-route-id="@reservation.Id">@reservation.Id</a>
+                        </th>
+                        <td>@reservation.CustomerId</td>
+                        <td>@reservation.CustomerName</td>
+                        <td>
+                            @if (reservation.PreservedDate == null)
+                            {
+                                <p>No Date Selected</p>
+                            }
+                            else
+                            {
+                                @reservation.PreservedDate
+                            }
+                        </td>
+                        <td>@reservation.ServiceNumber</td>
+                        <td>@reservation.CreatedDate.ToString(GlobalVariables.DateTimeFormat)</td>
+                        <td>@reservation.LastUpdate.ToString(GlobalVariables.DateTimeFormat)</td>
+                        <td class="text-danger fw-bold">@actualPrice</td>
+                        <td>@statusList.Single(parameter => parameter.Id == reservation.Status).DisplayName</td>
+                        <td>
+                            <div style="display: flex; justify-content: space-around">
+                                @switch (reservation.Status)
+                                {
+                                    case GlobalVariables.SubmittedReservationStatus:
+                                        <form asp-controller="Reservation" asp-action="ApproveReservation" method="post">
+                                            <button class="btn btn-primary" asp-controller="Reservation" asp-action="ApproveReservation" asp-route-id="@reservation.Id">Approve</button>
+                                        </form>
+                                        <form asp-controller="Reservation" asp-action="ApproveReservation" method="post">
+                                            <button class="btn btn-danger" asp-controller="Reservation" asp-action="CancelReservation" asp-route-id="@reservation.Id">Cancel</button>
+                                        </form>
+                                        break;
+                                    case GlobalVariables.ApprovedReservationStatus:
+                                        <form asp-controller="Reservation" asp-action="ApproveReservation" method="post">
+                                            <button class="btn btn-primary" asp-controller="Reservation" asp-action="ReservationSuccess" asp-route-id="@reservation.Id">Complete</button>
+                                        </form>
+                                        <form asp-controller="Reservation" asp-action="ApproveReservation" method="post">
+                                            <button class="btn btn-danger" asp-controller="Reservation" asp-action="CancelReservation" asp-route-id="@reservation.Id">Cancel</button>
+                                        </form>
+                                        break;
+                                    case GlobalVariables.SuccessReservationStatus:
+                                        <form asp-controller="Reservation" asp-action="CreatePrescription" method="post">
+                                            <button class="btn btn-info" asp-controller="Reservation" asp-action="CreatePrescription" asp-route-reservationId="@reservation.Id" method="post">
+                                                Prescription
+                                            </button>
+                                        </form>
+                                        break;
+                                }
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <nav>
+            <ul class="pagination justify-content-center">
+                <li class="page-item">
+                    <a class="page-link" href="#">1</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">2</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">3</a>
+                </li>
+            </ul>
+        </nav>
+    }
+    else
+    {
+        <h1>You haven't made any reservation</h1>
+    }
+</div>
+

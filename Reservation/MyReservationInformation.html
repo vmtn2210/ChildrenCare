@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="./reservation.css">
+    <title>Reservation Information | Medic</title>
+</head>
+<body>
+    <h1 class="text-center">My Reservation Details</h1>
+    <div class="choose-more-service mb-3">
+        <div class="col-2 me-1">
+            <div class="input-group">
+                <!-- Table ko có service, service category nhưng lại bắt search nó? -->
+                <input type="text" class="form-control" placeholder="Service">
+                <button class="btn btn-primary" type="button">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <table class="table table-responsive text-center">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Reservation Date</th>
+                <th scope="col">Service</th>
+                <th scope="col">Time to Check Up</th>
+                <th scope="col">Total cost</th>
+                <th scope="col">Status</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>15/05/2022</td>
+                <td>Surgery | 2</td>
+                <td>12h 20/05/2022</td>
+                <td class="text-danger fw-bold">$200</td>
+                <td>Submited</td>
+                <!-- Submited mới đc update/cancel -->
+                <td>
+                    <button class="btn btn-success">Update</button>
+                    <button class="btn btn-danger">Cancel</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <h4>The receiver information</h4>
+    <div class="receiver-info">
+        <div class="row">
+            <div class="name col-3">Full Name</div>
+            <div class="col-9">Nguyen Trung Hieus</div>
+        </div>
+        <div class="row">
+            <div class="name col-3">Gender</div>
+            <div class="col-9">Male</div>
+        </div>
+        <div class="row">
+            <div class="name col-3">Email</div>
+            <div class="col-9">nthieu1332002@gmail.com</div>
+        </div>
+        <div class="row">
+            <div class="name col-3">Mobile Phone</div>
+            <div class="col-9">0945023429</div>
+        </div>
+    </div>
+    <div class="list-of-reserved mt-3">
+        <h4>List of Reserved Services</h4>
+        <table class="table table-responsive text-center">
+            <thead>
+                <tr>
+                    <th scope="col">Thumbnail</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Service</th>
+                    <th scope="col">Num of people</th>
+                    <th scope="col">Total cost</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><img class="thumbnail" src="./hotblog.jpg" alt="1"></td>
+                    <td>Nguyen Trung Hieu</td>
+                    <td>Surgery</td>
+                    <td>2</td>
+                    <td>$100</td>
+                    <td>
+                        <button class="btn btn-primary">Re-reserve</button>
+                        <button class="btn btn-warning">Feedback</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <nav>
+        <ul class="pagination justify-content-center">
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+        </ul>
+    </nav>
+</body>
+</html>

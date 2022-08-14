@@ -1,0 +1,165 @@
+@using ChildrenCare.Entities
+@model ChildrenCare.DTOs.ReservationDetailDTOs.ChangeReservationDetailRequestDTO
+@{
+    var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+    Layout = "_Layout";
+    int reservationId = ViewBag.ReservationId;
+    List<ReservationDetail> reservationDetailList = ViewBag.ReservationDetailList;
+    bool isEditable = ViewBag.IsEditable;
+    string role = ViewBag.Role;
+    Dictionary<int, List<StaffSpecialization>> dictionary = ViewBag.Dictionary;
+    var index = 0;
+}
+
+<!-- Sub navbar -->
+<div class=container>
+    <nav class="nav">
+        <a class="nav-link active" aria-current="page" asp-controller="Reservation" asp-action="ReservationDetail" asp-route-id="@reservationId">Reservation Details</a>
+        <a class="nav-link" aria-current="page" asp-controller="Reservation" asp-action="ReservationContact" asp-route-id="@reservationId">Contact</a>
+    </nav>
+
+
+    <div class="choose-more-service d-flex justify-content-between">
+        <div class="col-2 ">
+            @if (isEditable)
+            {
+                <a asp-controller="Service" asp-action="ServiceList" class="btn btn-outline-primary">Choose More Service</a>
+            }
+        </div>
+        <!-- Chỗ này link tới service list -->
+    </div>
+
+    <table class="table table-responsive text-center">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Staff</th>
+            <th scope="col">Price</th>
+            <th scope="col">Sale Price</th>
+            <th scope="col">Quantity</th>
+            @* <th scope="col">Number of person</th> *@
+            <th scope="col">Sub total cost</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        @for (var i = 0; i < reservationDetailList.Count; i++)
+        {
+            var detail = reservationDetailList[i];
+            // var basePrice = detail.BasePrice + " VND";
+            // var salePrice = detail.SalePrice + " VND";
+            // var totalServicePrice = detail.SalePrice * detail.Amount + " VND";
+            <tr>
+                <th scope="row">
+                    @{
+                        index++;
+                        <p>@index</p>
+                    }
+                </th>
+                <td>@detail.Service.Name</td>
+                <td>
+                    @if (isEditable)
+                    {
+                        <form asp-controller="Reservation" asp-action="ChangeStaffService" method="post">
+                            <input name="detailId" value="@detail.Id" type="hidden"/>
+                            <input name="reservationId" value="@reservationId" type="hidden"/>
+                            <select name="staffId" class="form-select" onchange="this.form.submit()">
+                                <option disabled selected> -- select a staff -- </option>
+                                @if (dictionary.ContainsKey(detail.ServiceId))
+                                {
+                                    @foreach (var staff in dictionary[detail.ServiceId])
+                                    {
+                                        if (staff.StaffId == detail.StaffId)
+                                        {
+                                            <option selected value="@(staff.StaffId)">@staff.Staff.FullName</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@(staff.StaffId)">@staff.Staff.FullName</option>
+                                        }
+                                    }
+                                }
+                            </select>
+                        </form>
+                    }
+                    else
+                    {
+                        @detail.Staff?.FullName
+                    }
+                </td>
+                <td>@string.Format(format, "{0:c0}", @detail.BasePrice)</td>
+                <td>@string.Format(format, "{0:c0}", @detail.SalePrice)</td>
+                <td>
+                    <div class="d-flex justify-content-center">
+                        @if (isEditable)
+                        {
+                            <form asp-controller="Reservation" asp-action="DecreaseServiceAmount" method="post">
+                                <input asp-for="DetailId" value="@detail.Id" type="hidden"/>
+                                <input asp-for="ReservationId" value="@reservationId" type="hidden"/>
+                                <button type="submit" class="btn btn-sm btn-primary me-1">-</button>
+                            </form>
+                        }
+                        @detail.Amount
+                        @if (isEditable)
+                        {
+                            <form asp-controller="Reservation" asp-action="AddServiceAmount" method="post">
+                                <input asp-for="DetailId" value="@detail.Id" type="hidden"/>
+                                <input asp-for="ReservationId" value="@reservationId" type="hidden"/>
+                                <button type="submit" class="btn btn-sm btn-primary ms-1">+</button>
+                            </form>
+                        }
+                    </div>
+                </td>
+                <td hidden>
+                    <div class="d-flex justify-content-center">
+                        @if (isEditable)
+                        {
+                            <form asp-controller="Reservation" asp-action="DecreaseServiceNumberOfPeople" method="post">
+                                <input asp-for="DetailId" value="@detail.Id" type="hidden"/>
+                                <input asp-for="ReservationId" value="@reservationId" type="hidden"/>
+                                <button type="submit" class="btn btn-sm btn-primary me-1">-</button>
+                            </form>
+                        }
+                        @detail.NumberOfPeople
+                        @if (isEditable)
+                        {
+                            <form asp-controller="Reservation" asp-action="AddServiceNumberOfPeople" method="post">
+                                <input asp-for="DetailId" value="@detail.Id" type="hidden"/>
+                                <input asp-for="ReservationId" value="@reservationId" type="hidden"/>
+                                <button type="submit" class="btn btn-sm btn-primary ms-1">+</button>
+                            </form>
+                        }
+                    </div>
+                </td>
+                <td class="text-danger fw-bold">@string.Format(format, "{0:c0}", @detail.SalePrice * detail.Amount)</td>
+                <td>
+                    @if (isEditable)
+                    {
+                        <form asp-controller="Reservation" asp-action="RemoveServiceFromReservation" method="post">
+                            <input asp-for="DetailId" value="@detail.Id" type="hidden"/>
+                            <input asp-for="ReservationId" value="@reservationId" type="hidden"/>
+                            <button type="submit">
+                                <i class="btn text-danger fa-solid fa-trash-can"></i>
+                            </button>
+                        </form>
+                    }
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+    <div class="check-out d-flex justify-content-center text-center">
+        <div>
+            <h3 class="text-danger">Total: @string.Format(format, "{0:c0}", reservationDetailList.Sum(detail => detail.SalePrice * detail.Amount))</h3>
+            <a class="btn btn-outline-primary" asp-controller="Reservation" asp-action="@((role.Equals("doctor") || role.Equals("nurse")) ? "ReservationManagement" : "MyReservation")">Back</a>
+            @if (isEditable && reservationDetailList.Count > 0)
+            {
+                <a asp-controller="Reservation" asp-action="ReservationContact" asp-route-id="@reservationId" class="btn btn-danger">Contact</a>
+            }
+        </div>
+        <!-- Chỗ này link tới Reservation contact -->
+    </div>
+
+</div>

@@ -1,0 +1,51 @@
+﻿@model IEnumerable<ChildrenCare.Entities.Prescription>
+
+@{
+    ViewData["Title"] = "Prescriptions Customer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <h1>Your Prescriptions</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ReservationId)
+                    </th>
+                    <th>
+                        Your name
+                    </th>
+                    <th>
+                        Staff
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CreatedDate)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                    @foreach (var item in Model)
+    {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ReservationId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CustomerAccount.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AuthorAccount.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreatedDate)
+                    </td>
+                    <td>
+                        @*<a class="btn btn-primary" asp-action="CreatePrescription" asp-route-reservationId="@item.ReservationId">Create New</a>*@
+                        <a class="btn btn-primary" asp-action="YourPrescriptionDetail" asp-route-id="@item.Id">Details</a>
+                    </td>
+                </tr>
+    }
+            </tbody>
+        </table>
+</div>
